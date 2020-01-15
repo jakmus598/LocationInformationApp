@@ -1,0 +1,25 @@
+{
+  "name": "locationwizard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "concurrently": "^5.0.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "node-fetch": "^2.6.0",
+    "parse-json": "^5.0.0",
+    "passport": "^0.4.1",
+    "passport-twitter": "^1.0.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "",
+  "license": "ISC"
+}

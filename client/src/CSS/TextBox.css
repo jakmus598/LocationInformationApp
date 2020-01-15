@@ -1,0 +1,8 @@
+.title-name
+{
+    text-align: center;
+    font-family: "Century Gothic", sans-serif;
+    font-size: 25px;
+    overflow: hidden;
+    white-space: nowrap
+}
