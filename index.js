@@ -1,7 +1,7 @@
 var express = require('express')
 var passport = require('passport')
 var TwitterStrategy = require('passport-twitter').Strategy
-//var keys = require('./config/keys')
+var keys = require('./config/keys')
 var session = require('express-session')
 var fetch = require('node-fetch')
 //var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
@@ -11,7 +11,7 @@ var cors = require('cors')
 
 
 const PORT = process.env.PORT || 5000
-const TICKETMASTER_API_KEY = process.env.TICKETMASTER_API_KEY
+const TICKETMASTER_API_KEY = process.env.TICKETMASTER_API
 const YELP_API_KEY = process.env.YELP_API_KEY
 const YELP_CLIENT_ID = process.env.YELP_CLIENT_ID
 const TWITTER_CONSUMER_KEY = process.env.TWITTER_CONSUMER_KEY 
