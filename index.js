@@ -9,12 +9,15 @@ var fetch = require('node-fetch')
 var jsonParser = require('parse-json')
 var cors = require('cors')
 
+
+const PORT = process.env.PORT || 5000
+
 //fetch.fetchUrl('https://app.ticketmaster.com/discovery/v2/events.json?apikey=OUUIbGtTXR1GAlGkkWRKIfK6cNG7ydBc&postalCode=60612', function(meta, error, body){ console.log(meta.toString())})
 
 var apiCallbacks = {twitterURL: 'https://api.twitter.com/1.1/trends/place.json?id=2379574'}
 var app = express()
 app.use(cors())
-app.listen(5000, () => {console.log('Listening')})
+app.listen(PORT, () => {console.log('Listening')})
 app.get('/jg', (req, res) => {res.send('Hi')})
 var OAuth = require('oauth')
 
