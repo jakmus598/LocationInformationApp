@@ -11,6 +11,14 @@ var cors = require('cors')
 
 
 const PORT = process.env.PORT || 5000
+const TICKETMASTER_API_KEY = process.env.TICKETMASTER_API_KEY
+const YELP_API_KEY = process.env.YELP_API_KEY
+const YELP_CLIENT_ID = process.env.YELP_CLIENT_ID
+const TWITTER_CONSUMER_KEY = process.env.TWITTER_CONSUMER_KEY 
+const TWITTER_CONSUMER_SECRET = process.env.TWITTER_CONSUMER_SECRET
+const TWITTER_ACCESS_TOKEN = process.env.TWITTER_ACCESS_TOKEN
+const TWITTER_TOKEN_SECRET = process.env.TWITTER_TOKEN_SECRET
+
 
 //fetch.fetchUrl('https://app.ticketmaster.com/discovery/v2/events.json?apikey=OUUIbGtTXR1GAlGkkWRKIfK6cNG7ydBc&postalCode=60612', function(meta, error, body){ console.log(meta.toString())})
 
@@ -80,10 +88,10 @@ const tokenConfig = {
 
   //USER AUTHENTICATION WITH TWITTER
 passport.use(new TwitterStrategy({
-    consumerKey: keys.twitterConsumerKey,
-    consumerSecret: keys.twitterConsumerSecret,
-    accessToken: keys.twitterAccessToken,
-    tokenSecret: keys.twitterTokenSecret,
+    consumerKey: TWITTER_CONSUMER_KEY,
+    consumerSecret: TWITTER_CONSUMER_SECRET,
+    accessToken: TWITTER_ACCESS_TOKEN,
+    tokenSecret: TWITTER_TOKEN_SECRET,
     //callbackURL - Where user is redirected to after request is confirmed
     callbackURL: '/trendingTweets' 
 }, //(accessToken) => console.log(accessToken)))
@@ -102,7 +110,7 @@ app.get('/trendingTweets', passport.authenticate('twitter'))
 //Parse JSON from TicketMaster to isolate necessary information
 app.get('/events', async (req, res, error) => {
     //Get the response of making the API call
-    var fetchRes = await fetch('https://app.ticketmaster.com/discovery/v2/events.json?apikey=' + keys.ticketMasterAPIKey + 
+    var fetchRes = await fetch('https://app.ticketmaster.com/discovery/v2/events.json?apikey=' + TICKETMASTER_API_KEY + 
     '&postalCode=60612')
     //Conert that response to a JSON object (returns a promise)
     var jsonRes = await fetchRes.json()
@@ -126,7 +134,7 @@ app.get('/events', async (req, res, error) => {
     //TODO: Allow users to specify radius (entire application?)
     //TODO: Allow filtering
     var fetchRes = await fetch('https://api.yelp.com/v3/businesses/search?location=60015', {
-    headers: {'Authorization': 'Bearer ' + keys.yelpAPIKey}})
+    headers: {'Authorization': 'Bearer ' + YELP_API_KEY}})
     var jsonRes = await fetchRes.json()
     //res.send(jsonRes)
     //res.send(jsonRes['businesses'][1]['name'])
