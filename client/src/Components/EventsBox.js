@@ -61,7 +61,8 @@ class EventsBox extends TextBox
                     //Create a new TextButton with the name, and url of the event
                     //Use an OtherInfo component to store data relating to date and time of event
                     textButtons.push(<TextButton className="event-button" name={currentValue['name']} url={currentValue['url']}
-                    otherInfo={'Hello there'}></TextButton>)
+                    otherInfo={<OtherInfo info={[currentValue['date'], currentValue['time']]}
+                    className="date-and-time" />}></TextButton>)
                 }
                 return textButtons
             

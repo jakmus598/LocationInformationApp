@@ -201,8 +201,8 @@ app.get('/events', async (req, res, error) => {
     }
     
     timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes;  // get minutes
-    timeValue += (seconds < 10) ? ":0" + seconds : ":" + seconds;  // get seconds
-    timeValue += (hours >= 12) ? " P.M." : " A.M.";  // get AM/PM
+    //timeValue += (seconds < 10) ? ":0" + seconds : ":" + seconds;  // get seconds
+    timeValue += (hours >= 12) ? " pm" : " am";  // get AM/PM
 
     return timeValue
   }
