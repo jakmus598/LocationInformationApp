@@ -134,14 +134,15 @@ app.get('/events', async (req, res, error) => {
       //Get name, url to buy tickets, and date
       name = jsonRes['_embedded']['events'][i]['name']
       url = jsonRes['_embedded']['events'][i]['url']
-      date = jsonRes['embedded']['events'][i]['dates']['start']['localDate']
+      //date = jsonRes['embedded']['events'][i]['dates']['start']['localDate']
 
       //Get time and convert it from military
-      time = jsonRes['embedded']['events'][i]['dates']['start']['localTime']
-      time = convertTime(time)
+      //time = jsonRes['embedded']['events'][i]['dates']['start']['localTime']
+      //time = convertTime(time)
 
       //Store all information in a single Object
-      var basicInformation = {'name': name, 'url': url, 'date': date, 'time': time}
+      var basicInformation = {'name': name, 'url': url}
+      //'date': date, 'time': time}
       eventInformation.push(basicInformation)
     }
 
