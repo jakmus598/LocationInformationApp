@@ -55,8 +55,8 @@ class EventsBox extends TextBox
                 {
                     //Use a variable for the current event in the array
                     var currentValue = this.state['events'][i]
-                    console.log(currentValue['date'])
-                    console.log(currentValue['time'])
+                    //console.log(currentValue['date'])
+                    //console.log(currentValue['time'])
 
                     //Create a new TextButton with the name, and url of the event
                     //Use an OtherInfo component to store data relating to date and time of event

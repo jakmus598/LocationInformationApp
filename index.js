@@ -179,7 +179,7 @@ app.get('/events', async (req, res, error) => {
    * Note: the majority of this method was taken from:
    * https://stackoverflow.com/questions/29206453/best-way-to-convert-military-time-to-standard-time-in-javascript
    */
-  convertTime(time)
+  function convertTime(time)
   {
     time = time.split(':'); // convert to array
 
