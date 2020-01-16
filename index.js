@@ -130,8 +130,19 @@ app.get('/events', async (req, res, error) => {
     var eventInformation = []
     for(var i in jsonRes['_embedded']['events'])
     {
-      var nameURLPair = {'name': jsonRes['_embedded']['events'][i]['name'], 'url': jsonRes['_embedded']['events'][i]['url']}
-      eventInformation.push(nameURLPair)
+
+      //Get name, url to buy tickets, and date
+      name = jsonRes['_embedded']['events'][i]['name']
+      url = jsonRes['_embedded']['events'][i]['url']
+      date = jsonRes['embedded']['events'][i]['dates']['start']['localDate']
+
+      //Get time and convert it from military
+      time = jsonRes['embedded']['events'][i]['dates']['start']['localTime']
+      time = convertTime(time)
+
+      //Store all information in a single Object
+      var basicInformation = {'name': name, 'url': url, 'date': date, 'time': time}
+      eventInformation.push(basicInformation)
     }
 
     /**var fetchYelpEvents = await fetch('https://api.yelp.com/v3/events/search?location=60015', {
@@ -162,6 +173,38 @@ app.get('/events', async (req, res, error) => {
     }
     return res.send(restaurants)
   })
+
+  /**
+   * Converts from military to standard time
+   * Note: the majority of this method was taken from:
+   * https://stackoverflow.com/questions/29206453/best-way-to-convert-military-time-to-standard-time-in-javascript
+   */
+  convertTime(time)
+  {
+    time = time.split(':'); // convert to array
+
+    // fetch
+    var hours = Number(time[0]);
+    var minutes = Number(time[1]);
+    var seconds = Number(time[2]);
+
+    // calculate
+    var timeValue;
+
+    if (hours > 0 && hours <= 12) {
+      timeValue= "" + hours;
+    } else if (hours > 12) {
+      timeValue= "" + (hours - 12);
+    } else if (hours == 0) {
+      timeValue= "12";
+    }
+    
+    timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes;  // get minutes
+    timeValue += (seconds < 10) ? ":0" + seconds : ":" + seconds;  // get seconds
+    timeValue += (hours >= 12) ? " P.M." : " A.M.";  // get AM/PM
+
+    return timeValue
+  }
 
   //app.get('/places', async(req, res) => 
 

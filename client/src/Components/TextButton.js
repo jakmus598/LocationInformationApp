@@ -12,7 +12,8 @@ class TextButton extends Component
     render()
     {
         return(
-            <ListGroupItem tag="a" href={this.props.url}>{this.props.name}</ListGroupItem>
+            <ListGroupItem className="text-button" tag="a" href={this.props.url}>{this.props.name}
+            {this.props.otherInfo}</ListGroupItem>
         )
     }
 }
