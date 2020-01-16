@@ -11,6 +11,14 @@ var cors = require('cors')
 
 
 const PORT = process.env.PORT || 5000
+/**const TICKETMASTER_API_KEY = keys.TICKETMASTER_API
+const YELP_API_KEY = keys.YELP_API_KEY
+const YELP_CLIENT_ID = keys.YELP_CLIENT_ID
+const TWITTER_CONSUMER_KEY = keys.TWITTER_CONSUMER_KEY 
+const TWITTER_CONSUMER_SECRET = keys.TWITTER_CONSUMER_SECRET
+const TWITTER_ACCESS_TOKEN = keys.TWITTER_ACCESS_TOKEN
+const TWITTER_TOKEN_SECRET = keys.TWITTER_TOKEN_SECRET
+*/
 const TICKETMASTER_API_KEY = process.env.TICKETMASTER_API
 const YELP_API_KEY = process.env.YELP_API_KEY
 const YELP_CLIENT_ID = process.env.YELP_CLIENT_ID
@@ -18,6 +26,7 @@ const TWITTER_CONSUMER_KEY = process.env.TWITTER_CONSUMER_KEY
 const TWITTER_CONSUMER_SECRET = process.env.TWITTER_CONSUMER_SECRET
 const TWITTER_ACCESS_TOKEN = process.env.TWITTER_ACCESS_TOKEN
 const TWITTER_TOKEN_SECRET = process.env.TWITTER_TOKEN_SECRET
+
 
 
 //fetch.fetchUrl('https://app.ticketmaster.com/discovery/v2/events.json?apikey=OUUIbGtTXR1GAlGkkWRKIfK6cNG7ydBc&postalCode=60612', function(meta, error, body){ console.log(meta.toString())})
