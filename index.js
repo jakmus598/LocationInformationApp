@@ -121,11 +121,11 @@ app.get('/trendingTweets', passport.authenticate('twitter'))
 
 //Parse JSON from TicketMaster to isolate necessary information
 app.get('/events', async (req, res, error) => {
-    //Get the response of making the API call
-    var fetchRes = await fetch('https://app.ticketmaster.com/discovery/v2/events.json?apikey=' + TICKETMASTER_API_KEY + 
-    '&postalCode=60612')
+    //Get the response of making the API call to TicketMaster
+    var fetchResTicketMaster = await fetch('https://app.ticketmaster.com/discovery/v2/events.json?apikey=' + TICKETMASTER_API_KEY + 
+    '&postalCode=60612&sort=name,date,asc')
     //Conert that response to a JSON object (returns a promise)
-    var jsonRes = await fetchRes.json()
+    var jsonRes = await fetchResTicketMaster.json()
     //Put the necessary key/value pairs into an array and return it
     var eventInformation = []
     for(var i in jsonRes['_embedded']['events'])
@@ -147,6 +147,17 @@ app.get('/events', async (req, res, error) => {
       var basicInformation = {'name': name, 'url': url, 'date': date, 'time': time}
       //'date': date, 'time': time}
       eventInformation.push(basicInformation)
+    }
+
+    //Get Yelp event information
+    var fetchYelpEvents = await fetch('https://api.yelp.com/v3/events?location=60015', {
+      headers: {'Authorization': 'Bearer ' + YELP_API_KEY}})
+    var jsonResYelp = await fetchYelpEvents.json()
+
+    //Parse Yelp JSON
+    for(var i in jsonResYelp['events'])
+    {
+      eventURL = jsonResYelp['events'][i]['event_site_url']
     }
 
     /**var fetchYelpEvents = await fetch('https://api.yelp.com/v3/events/search?location=60015', {

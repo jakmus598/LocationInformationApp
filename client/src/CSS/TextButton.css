@@ -4,11 +4,14 @@
     color: rgb(251, 179, 11);
     padding-right: 15px;
     width: 33%;
+    font-style: bold;
+
 }
 
 .row
 {
-    
+    border-bottom: 10px;
+    border-color: black;
 }
 
 .other-info

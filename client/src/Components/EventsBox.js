@@ -21,6 +21,18 @@ class EventsBox extends TextBox
     async getEvents()
     {
         var events = await getEventInformation()
+        /**
+         * If state = preview, only show first five elements. Otherwise, display all.
+         */
+        if(this.props.state === 'preview')
+        {
+            var tempEvents = []
+            for(var i=0; i < 5; i++)
+            {
+                tempEvents.push(events[i])
+            }
+            events = tempEvents
+        }
         this.setState({'events': events})
     }
 
@@ -30,7 +42,7 @@ class EventsBox extends TextBox
         this.getEvents()
         //console.log(this.state['events'])
 
-        return (<TextBox boxClassName="box" title="Upcoming Events"> 
+        return (<TextBox cardClass="card" className="text-box" title="Upcoming Events" state={{'mode': "preview"}}> 
             {   
                 this.state['events'] && this.getEventsArray()
             }

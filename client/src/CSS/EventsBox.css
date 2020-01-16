@@ -1,12 +1,31 @@
-.box
+/**.box
 {
     font-size: 20px;
-    text-align: center;
+    text-align: right;
     font-weight: bold;
     border: 50px;
     border-color: blue;
     padding: 30px;
     
+}
+*/
+
+.box
+{
+    position: relative;
+    left: 10px;
+    top: 160px;
+}
+
+.text-box
+{
+   
+}
+
+.card
+{
+    border: blue;
+    border: 15px;
 }
 
 /**.date-and-time

@@ -15,14 +15,12 @@ class TextButton extends Component
     render()
     {
         return(
-        <Container className="container">
             <Row className="row">
                 <Col className="name" md="auto">{this.props.name}</Col>
                 <Row>
                 <div className="other-info">{this.props.otherInfo}</div>
                 </Row>
             </Row>
-        </Container>
         )
     }
 

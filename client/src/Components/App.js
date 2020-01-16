@@ -17,8 +17,8 @@ class App extends Component
     {
         return(
             <div>
-                <h2 className="title">Location Wizard</h2>
-               <EventsBox></EventsBox>
+                <h2 className="site-title">Location Wizard</h2>
+               <EventsBox state="preview"></EventsBox>
         </div>
         )
     }
