@@ -1,8 +1,12 @@
-.box-title
+.box
 {
     font-size: 20px;
     text-align: center;
     font-weight: bold;
+    border: 50px;
+    border-color: blue;
+    padding: 30px;
+    
 }
 
 /**.date-and-time

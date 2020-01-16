@@ -1,7 +1,31 @@
-.text-button
+.name
 {
-    font-size: 15px;
+    font-size: 20px;
     color: rgb(251, 179, 11);
+    padding-right: 15px;
+    width: 33%;
+}
+
+.row
+{
+    
+}
+
+.other-info
+{
+    font-size: 10px;
+    color: black;
+}
+
+/**.other-info > br
+{
+    display: block;
+    content: " "
+}
+*/
+
+   
     
 
-}
+
+

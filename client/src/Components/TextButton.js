@@ -1,6 +1,9 @@
 import React, {Component} from 'react'
 import {Route} from 'react-router-dom'
-import {ListGroupItem} from 'reactstrap'
+import {ListGroup, ListGroupItem} from 'reactstrap'
+import {Container, Row, Col} from 'reactstrap'
+import '../CSS/TextButton.css'
+
 
 class TextButton extends Component
 {
@@ -12,11 +15,35 @@ class TextButton extends Component
     render()
     {
         return(
-            <ListGroupItem className="text-button" tag="a" href={this.props.url}>{this.props.name}
-            {this.props.otherInfo}</ListGroupItem>
+        <Container className="container">
+            <Row className="row">
+                <Col className="name" md="auto">{this.props.name}</Col>
+                <Row>
+                <div className="other-info">{this.props.otherInfo}</div>
+                </Row>
+            </Row>
+        </Container>
         )
     }
+
+    /**
+     * 
+     */
+
+    /**
+     *  <ListGroup horizontal className="row">
+            <ListGroupItem className="name" tag="p">
+                <Col>{this.props.name}</Col>
+                <Col>Hello</Col></ListGroupItem>
+            <ListGroupItem className="other-info">{this.props.otherInfo}</ListGroupItem>
+            </ListGroup>
+     */
 }
+
+/**
+ * <ListGroupItem className="text-button" tag="a" href={this.props.url}>{this.props.name}
+            {this.props.otherInfo}</ListGroupItem>
+ */
 
 /**
  * return(

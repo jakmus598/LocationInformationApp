@@ -30,7 +30,7 @@ class EventsBox extends TextBox
         this.getEvents()
         //console.log(this.state['events'])
 
-        return (<TextBox className="box" style={{width: '25rem'}} title="Upcoming Events"> 
+        return (<TextBox boxClassName="box" title="Upcoming Events"> 
             {   
                 this.state['events'] && this.getEventsArray()
             }
@@ -60,7 +60,7 @@ class EventsBox extends TextBox
 
                     //Create a new TextButton with the name, and url of the event
                     //Use an OtherInfo component to store data relating to date and time of event
-                    textButtons.push(<TextButton className="event-button" name={currentValue['name']} url={currentValue['url']}
+                    textButtons.push(<TextButton name={currentValue['name']} url={currentValue['url']}
                     otherInfo={<OtherInfo info={[currentValue['date'], currentValue['time']]}
                     className="date-and-time" />}></TextButton>)
                 }

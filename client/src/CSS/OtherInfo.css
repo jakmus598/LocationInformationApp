@@ -1,0 +1,16 @@
+/**
+    Create default styling for OtherInfo component
+
+
+div p
+{
+    font-size: 5px;
+    color: black;
+}
+
+div br
+{
+    display: block;
+    margin: 2px;
+}
+*/

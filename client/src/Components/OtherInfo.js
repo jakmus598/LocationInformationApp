@@ -1,4 +1,6 @@
+import '../CSS/OtherInfo.css'
 import React, {Component} from 'react'
+import {Row, Col} from 'reactstrap'
 
 class OtherInfo extends Component
 {
@@ -9,13 +11,7 @@ class OtherInfo extends Component
 
     render()
     {
-        return(
-            <div className={this.props.className}>
-                {
-                    this.getParagraphArray()
-                }
-            </div>
-        )
+        return(this.getParagraphArray())
     }
 
     /**
@@ -24,11 +20,13 @@ class OtherInfo extends Component
     getParagraphArray()
     {
         var paragraphArray = []
+        //paragraphArray.push(<Row>)
         for(var i in this.props.info)
         {
-            paragraphArray.push(<p key={i}>{this.props.info[i]}</p>)
-            paragraphArray.push(<br></br>)
+            paragraphArray.push(<Col md="auto">{this.props.info[i]}</Col>)
+            //paragraphArray.push(<br></br>)
         }
+        //paragraphArray.push(</Row>)
 
         return paragraphArray
     }

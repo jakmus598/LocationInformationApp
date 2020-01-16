@@ -3,7 +3,8 @@ import React, {Component} from 'react'
 import {Route} from 'react-router-dom'
 import Box from '@material-ui/core/Box'
 import TextButton from './TextButton'
-import {Card, CardTitle, ListGroup} from 'reactstrap'
+import {Card, CardTitle, ListGroup, Container} from 'reactstrap'
+import {borders} from '@material-ui/system'
 
 class TextBox extends Component
 {
@@ -17,14 +18,23 @@ class TextBox extends Component
     render()
     {
         return(
-            <Card style={this.props.style}>
-                <CardTitle className="title-name">{this.props.title}</CardTitle>
+            <Box className={this.props.boxClassName}>
+        <Container className={this.props.containerClass}>{this.props.title}
                 {this.props.children}
-            </Card>   
+                </Container>
+                </Box>
         )
+               
+        
     }
 }
 
+/**
+ * <Card style={this.props.style}>
+                <CardTitle className="title-name">{this.props.title}</CardTitle>
+                {this.props.children}
+            </Card>
+ */
 /**
  * <Box>
             {this.props.children}
