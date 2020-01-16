@@ -3,8 +3,10 @@ import { BrowserRouter, Route } from 'react-router-dom'
 var fetch = require('node-fetch')
 
 //The URLs at which the API can be fetched
-const API_URL = process.env.NODE_ENV === 'production' ? 
+/**const API_URL = process.env.NODE_ENV === 'production' ? 
 'http://location-wizard.herokuapp.com' : 'http://localhost:5000'
+*/
+const API_URL = 'http://location-wizard.herokuapp.com'
 
 export async function getEventInformation()
 {
