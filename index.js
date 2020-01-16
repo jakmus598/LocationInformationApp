@@ -131,11 +131,14 @@ app.get('/events', async (req, res, error) => {
     for(var i in jsonRes['_embedded']['events'])
     {
 
-      //Get name, url to buy tickets, and date
+      //Get name, url to buy tickets
       name = jsonRes['_embedded']['events'][i]['name']
       url = jsonRes['_embedded']['events'][i]['url']
+
+      //Modify date so that it appears in month/day format (excludes year)
       date = jsonRes['_embedded']['events'][i]['dates']['start']['localDate']
-  
+      date = convertDate(date)
+      
       //Get time and convert it from military
       time = jsonRes['_embedded']['events'][i]['dates']['start']['localTime']
       time = convertTime(time)
@@ -205,6 +208,19 @@ app.get('/events', async (req, res, error) => {
     timeValue += (hours >= 12) ? " pm" : " am";  // get AM/PM
 
     return timeValue
+  }
+
+  /**
+   * Converts dates to month/day format
+   */
+  function convertDate(date)
+  {
+    date = date.split("-")
+
+    var month = date[1]
+    var day = date[2]
+
+    return (month + "/" + day)
   }
 
   //app.get('/places', async(req, res) => 
