@@ -28,6 +28,7 @@ const TWITTER_CONSUMER_KEY = process.env.TWITTER_CONSUMER_KEY
 const TWITTER_CONSUMER_SECRET = process.env.TWITTER_CONSUMER_SECRET
 const TWITTER_ACCESS_TOKEN = process.env.TWITTER_ACCESS_TOKEN
 const TWITTER_TOKEN_SECRET = process.env.TWITTER_TOKEN_SECRET
+const TWITTER_BEARER_TOKEN = process.env.TWITTER_BEARER_TOKEN
 
 
 
@@ -105,7 +106,7 @@ passport.use(new TwitterStrategy({
     accessToken: TWITTER_ACCESS_TOKEN,
     tokenSecret: TWITTER_TOKEN_SECRET,
     //callbackURL - Where user is redirected to after request is confirmed
-    callbackURL: '/trendingTweets' 
+    callbackURL: '/authenticate/twitter' 
 }, //(accessToken) => console.log(accessToken)))
 function(accessToken, tokenSecret, profile, done) {
     console.log('functikon executed')
@@ -116,7 +117,28 @@ function(accessToken, tokenSecret, profile, done) {
   }
 ))
 
-app.get('/trendingTweets', passport.authenticate('twitter'))
+app.get('/authenticate/twitter', passport.authenticate('twitter'))
+
+app.get('/trendingTweets', async (req, res) => {
+  //TODO: Use Yahoo database to obtain user's WOEID
+  var fetchTweets = await fetch('https://api.twitter.com/1.1/trends/place.json?id=2379574', {
+  headers: {'Authorization': 'Bearer ' + TWITTER_BEARER_TOKEN}})
+
+  var jsonRes = await fetchTweets.json()
+
+  //Parse the JSON accordingly
+  var tweetInformation = []
+  for(var i in jsonRes[0]['trends'])
+  {
+    var name = jsonRes[0]['trends'][i]['name']
+    var url = jsonRes[0]['trends'][i]['url']
+    tweetInformation.push({'name': name, 'url': url})
+  }
+  return res.send(tweetInformation)
+
+  
+
+})
 
 
 //Parse JSON from TicketMaster to isolate necessary information
@@ -124,7 +146,8 @@ app.get('/events', async (req, res, error) => {
     //Get the response of making the API call to TicketMaster
     //TODO: Obtain city name from entered zip code (allows for better results in this API)
     var fetchResTicketMaster = await fetch('https://app.ticketmaster.com/discovery/v2/events.json?apikey=' + TICKETMASTER_API_KEY + 
-    '&city=Chicago&stateCode=IL&sort=date,asc')
+    '&city=Chicago&stateCode=IL')
+    //TODO: Get it working so that it sorts by date &sort=date,asc')
     //&city=Chicago&stateCode=IL&sort=date,asc
     //Conert that response to a JSON object (returns a promise)
     var jsonRes = await fetchResTicketMaster.json()
@@ -191,6 +214,15 @@ app.get('/events', async (req, res, error) => {
     }
     return res.send(restaurants)
   })
+
+  /**app.get('/news', async(req, res) => {
+    var 
+
+
+  })
+  */
+
+
 
   /**
    * Converts from military to standard time

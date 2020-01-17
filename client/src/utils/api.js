@@ -15,3 +15,4 @@ export async function getEventInformation()
     return eventJSON
     //res.json()).then(data => {return Promise.resolve(data)}))
 }
+
