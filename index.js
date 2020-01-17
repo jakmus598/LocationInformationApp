@@ -159,6 +159,27 @@ app.get('/facilities/gyms', async(req, res) => {
 
 })
 
+app.get('/kids/playgrounds', async(req, res) => {
+
+  var fetchResGyms = await fetch('https://api.yelp.com/v3/businesses/search?categories=playgrounds&location=60015', {
+    headers: {'Authorization': 'Bearer ' + YELP_API_KEY}})
+
+  var jsonRes = await fetchResGyms.json()
+
+  //Parse the JSON accordingly
+  var playgroundInformation = []
+  for(var i in jsonRes['businesses'])
+  {
+    var name = jsonRes['businesses'][i]['name']
+    var rating = jsonRes['businesses'][i]['rating']
+    var url = jsonRes['businesses'][i]['url']
+    playgroundInformation.push({'name': name, 'rating': rating, 'url': url})
+  }
+
+  return res.send(playgroundInformation)
+
+})
+
 
 //Parse JSON from TicketMaster to isolate necessary information
 app.get('/events', async (req, res, error) => {
