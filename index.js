@@ -124,7 +124,7 @@ app.get('/events', async (req, res, error) => {
     //Get the response of making the API call to TicketMaster
     //TODO: Obtain city name from entered zip code (allows for better results in this API)
     var fetchResTicketMaster = await fetch('https://app.ticketmaster.com/discovery/v2/events.json?apikey=' + TICKETMASTER_API_KEY + 
-    '&postalCode=60602')
+    '&city=Chicago&stateCode=IL&sort=date,asc&size=15')
     //&city=Chicago&stateCode=IL&sort=date,asc
     //Conert that response to a JSON object (returns a promise)
     var jsonRes = await fetchResTicketMaster.json()
