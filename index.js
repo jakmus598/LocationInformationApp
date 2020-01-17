@@ -8,6 +8,7 @@ var fetch = require('node-fetch')
 //var xhr = new XMLHttpRequest()
 var jsonParser = require('parse-json')
 var cors = require('cors')
+var crypto = require('crypto')
 
 
 const PORT = process.env.PORT || 5000
@@ -29,8 +30,8 @@ const TWITTER_CONSUMER_SECRET = process.env.TWITTER_CONSUMER_SECRET
 const TWITTER_ACCESS_TOKEN = process.env.TWITTER_ACCESS_TOKEN
 const TWITTER_TOKEN_SECRET = process.env.TWITTER_TOKEN_SECRET
 const TWITTER_BEARER_TOKEN = process.env.TWITTER_BEARER_TOKEN
-
-
+const YAHOO_CONSUMER_KEY = process.env.YAHOO_CONSUMER_KEY
+const YAHOO_CONSUMER_SECRET = process.env.YAHOO_CONSUMER_SECRET
 
 
 //fetch.fetchUrl('https://app.ticketmaster.com/discovery/v2/events.json?apikey=OUUIbGtTXR1GAlGkkWRKIfK6cNG7ydBc&postalCode=60612', function(meta, error, body){ console.log(meta.toString())})
@@ -119,6 +120,14 @@ function(accessToken, tokenSecret, profile, done) {
 
 app.get('/authenticate/twitter', passport.authenticate('twitter'))
 
+app.get('/weather', async (req, res) => {
+
+/**
+ * Taken from https://www.npmjs.com/package/oauth-1.0a
+ */
+
+})
+
 app.get('/trendingTweets', async (req, res) => {
   //TODO: Use Yahoo database to obtain user's WOEID
   var fetchTweets = await fetch('https://api.twitter.com/1.1/trends/place.json?id=2379574', {
@@ -138,7 +147,7 @@ app.get('/trendingTweets', async (req, res) => {
 
 })
 
-app.get('/facilities/gyms', async(req, res) => {
+app.get('/places/gyms', async(req, res) => {
 
   var fetchResGyms = await fetch('https://api.yelp.com/v3/businesses/search?categories=gyms&location=60015', {
     headers: {'Authorization': 'Bearer ' + YELP_API_KEY}})
@@ -159,7 +168,7 @@ app.get('/facilities/gyms', async(req, res) => {
 
 })
 
-app.get('/kids/playgrounds', async(req, res) => {
+app.get('/places/outdoors/playgrounds', async(req, res) => {
 
   var fetchResGyms = await fetch('https://api.yelp.com/v3/businesses/search?categories=playgrounds&location=60015', {
     headers: {'Authorization': 'Bearer ' + YELP_API_KEY}})
@@ -181,12 +190,20 @@ app.get('/kids/playgrounds', async(req, res) => {
 })
 
 
+//TODO: Create method to obtain WOEID
+//Note: this will have to be done by parsing HTML (no endpoint for WOEIDs directly)
+app.get('/weather', async(req, res) => {
+var fetchWeather = await fetch
+
+})
+
+
 //Parse JSON from TicketMaster to isolate necessary information
 app.get('/events', async (req, res, error) => {
     //Get the response of making the API call to TicketMaster
     //TODO: Obtain city name from entered zip code (allows for better results in this API)
     var fetchResTicketMaster = await fetch('https://app.ticketmaster.com/discovery/v2/events.json?apikey=' + TICKETMASTER_API_KEY + 
-    '&city=Chicago&stateCode=IL')
+    '&city=Chicago&stateCode=IL&sort=date,asc')
     //TODO: Get it working so that it sorts by date &sort=date,asc')
     //&city=Chicago&stateCode=IL&sort=date,asc
     //Conert that response to a JSON object (returns a promise)
@@ -234,10 +251,10 @@ app.get('/events', async (req, res, error) => {
   })
   
 
-  app.get('/food', async(req, res) => {
+  app.get('/places/restaurants', async(req, res) => {
     //TODO: Allow users to specify radius (entire application?)
     //TODO: Allow filtering
-    var fetchRes = await fetch('https://api.yelp.com/v3/businesses/search?location=60015', {
+    var fetchRes = await fetch('https://api.yelp.com/v3/businesses/search?categories=restaurants&location=60015', {
     headers: {'Authorization': 'Bearer ' + YELP_API_KEY}})
     var jsonRes = await fetchRes.json()
     //res.send(jsonRes)
