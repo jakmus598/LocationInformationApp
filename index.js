@@ -136,7 +136,26 @@ app.get('/trendingTweets', async (req, res) => {
   }
   return res.send(tweetInformation)
 
-  
+})
+
+app.get('/facilities/gyms', async(req, res) => {
+
+  var fetchResGyms = await fetch('https://api.yelp.com/v3/businesses/search?categories=gyms&location=60015', {
+    headers: {'Authorization': 'Bearer ' + YELP_API_KEY}})
+
+  var jsonRes = await fetchResGyms.json()
+
+  //Parse the JSON accordingly
+  var gymInformation = []
+  for(var i in jsonRes['businesses'])
+  {
+    var name = jsonRes['businesses'][i]['name']
+    var rating = jsonRes['businesses'][i]['rating']
+    var url = jsonRes['businesses'][i]['url']
+    gymInformation.push({'name': name, 'rating': rating, 'url': url})
+  }
+
+  jsonRes.send(gymInformation)
 
 })
 
@@ -208,7 +227,7 @@ app.get('/events', async (req, res, error) => {
     {
       //The current element of jsonRes['businesses'] array
       var currentValue = jsonRes['businesses'][i]
-      //var restInformation = {'name': jsonRes['businesses'][i]['name']}
+      //var url= {''name': jsonRes['businesses'][i]['name']}'
       var restInformation = {'url': currentValue['url'], 'name': currentValue['name'], 'alias': currentValue['alias']}
       restaurants.push(restInformation)
     }
