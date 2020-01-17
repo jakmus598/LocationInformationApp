@@ -155,7 +155,7 @@ app.get('/facilities/gyms', async(req, res) => {
     gymInformation.push({'name': name, 'rating': rating, 'url': url})
   }
 
-  return jsonRes.send(gymInformation)
+  return res.send(gymInformation)
 
 })
 
