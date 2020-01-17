@@ -5,7 +5,8 @@ module.exports = {
     TWITTER_TOKEN_SECRET: 'C2Kko3ZdVxjX77T7LroZWl765I5qquaXMOhEZNUz0YlHu',
     TICKETMASTER_API_KEY: 'OUUIbGtTXR1GAlGkkWRKIfK6cNG7ydBc',
     YELP_API_KEY: 'aUY4ICAoZbIeb_afGZGIcxqqGGb60cg-YfaeZDijwq33Lqwiwx9iHSeeqNd6-Sx6SLUC-h4TVzcuAo1VLalLAFIrUiCfJyEuf1zGH3sdFvwX9q_DLuWPkPJTV9EcXnYx',
-    YELP_CLIENT_ID: 'pIZjbHX2TjMZgduEqa-bYQ'
+    YELP_CLIENT_ID: 'pIZjbHX2TjMZgduEqa-bYQ',
+    EVENTFUL_API_KEY: 'TCTpfvb253jWTW8b'
 }   
 
 /**if(process.env.NODE_ENV === 'production')

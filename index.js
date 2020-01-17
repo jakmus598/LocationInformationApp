@@ -122,8 +122,9 @@ app.get('/trendingTweets', passport.authenticate('twitter'))
 //Parse JSON from TicketMaster to isolate necessary information
 app.get('/events', async (req, res, error) => {
     //Get the response of making the API call to TicketMaster
+    //TODO: Obtain city name from entered zip code (allows for better results in this API)
     var fetchResTicketMaster = await fetch('https://app.ticketmaster.com/discovery/v2/events.json?apikey=' + TICKETMASTER_API_KEY + 
-    '&postalCode=60602&sort=name,date,asc')
+    '&city=Chicago&stateCode=IL&startDateTime=2020-01-16&sort=date,asc')
     //Conert that response to a JSON object (returns a promise)
     var jsonRes = await fetchResTicketMaster.json()
     //Put the necessary key/value pairs into an array and return it
@@ -183,7 +184,7 @@ app.get('/events', async (req, res, error) => {
       //The current element of jsonRes['businesses'] array
       var currentValue = jsonRes['businesses'][i]
       //var restInformation = {'name': jsonRes['businesses'][i]['name']}
-      var restInformation = {'id': currentValue['id'], 'name': currentValue['name'], 'alias': currentValue['alias']}
+      var restInformation = {'url': currentValue['id'], 'name': currentValue['name'], 'alias': currentValue['alias']}
       restaurants.push(restInformation)
     }
     return res.send(restaurants)

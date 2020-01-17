@@ -65,6 +65,8 @@ class EventsBox extends TextBox
                 var textButtons = []
                 for(var i in this.state['events'])
                 {
+                    //TODO: Remove all events whose date is already passed
+
                     //Use a variable for the current event in the array
                     var currentValue = this.state['events'][i]
                     //console.log(currentValue['date'])
