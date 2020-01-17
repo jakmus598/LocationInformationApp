@@ -16,7 +16,9 @@ class TextButton extends Component
     {
         return(
             <Row className="row">
-                <Col className="name" md="auto">{this.props.name}</Col>
+                <Col md="auto">
+                    <a href={this.props.url} className="name">{this.props.name}</a>
+                </Col>
                 <Row>
                 <div className="other-info">{this.props.otherInfo}</div>
                 </Row>
