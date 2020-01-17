@@ -151,7 +151,7 @@ app.get('/events', async (req, res, error) => {
     }
 
     //Get Yelp event information
-    var fetchYelpEvents = await fetch('https://api.yelp.com/v3/events?location=60015', {
+    /**var fetchYelpEvents = await fetch('https://api.yelp.com/v3/events?location=60015', {
       headers: {'Authorization': 'Bearer ' + YELP_API_KEY}})
     var jsonResYelp = await fetchYelpEvents.json()
 
@@ -160,6 +160,7 @@ app.get('/events', async (req, res, error) => {
     {
       eventURL = jsonResYelp['events'][i]['event_site_url']
     }
+    */
 
     /**var fetchYelpEvents = await fetch('https://api.yelp.com/v3/events/search?location=60015', {
       headers: {'Authorization': 'Bearer ' + keys.yelpAPIKey}})
