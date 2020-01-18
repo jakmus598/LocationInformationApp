@@ -18,7 +18,7 @@ class App extends Component
         return(
             <div>
                 <h2 className="site-title">Location Wizard</h2>
-               <EventsBox state={{'mode': 'preview', 'filterValue': 'all'}}></EventsBox>
+               <EventsBox state={{'mode': 'preview', 'filterValue': 'all'}} title="Events"></EventsBox>
         </div>
         )
     }

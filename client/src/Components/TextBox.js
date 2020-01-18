@@ -20,7 +20,9 @@ class TextBox extends Component
     {
         return(
             <div className="box">
+                <div>
                 {this.props.filterList}
+                </div>
                 <Container>{this.props.title}
                 {this.props.children}
                 </Container>

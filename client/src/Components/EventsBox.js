@@ -22,6 +22,8 @@ class EventsBox extends TextBox
     async getEvents()
     {
         var events = await getEventInformation(this.state['filterValue'])
+        console.log('events: ' + events)
+        //console.log(this.state['filterValue'])
         /**
          * If state = preview, only show first five elements. Otherwise, display all.
          */
@@ -36,23 +38,9 @@ class EventsBox extends TextBox
         }
         this.setState({'events': events})
     }
+    
 
-    shouldComponentUpdate(nextProps, nextState)
-    {
-        if(nextState['filterValue'] !== this.state['filterValue'])
-        {
-            //nextProps.type = nextState['filterValue']
-            //nextProps.title = nextProps.filterValue
-            return true
-        }
-
-        if(nextState['mode'] !== this.state['mode'])
-        {
-            return true
-        }
-
-        return false
-    }
+    //this.state['events'] && this.getEventsArray()
 
     render()
     {
@@ -61,7 +49,7 @@ class EventsBox extends TextBox
         //console.log(this.state['events'])
 
         return (<TextBox className="text-box" title={this.props.title} state={{'mode': this.state['mode']}}
-                filterList={this.getFilterList()}> 
+                filterList={this.getFilterList()} buttons={this.getEventsArray()}> 
             {   
                 this.state['events'] && this.getEventsArray()
             }
@@ -80,7 +68,9 @@ class EventsBox extends TextBox
         }
 
         getEventsArray()
-        {
+        {   
+                console.log('Called')
+                //console.log(this.state['events'])
                 var textButtons = []
                 for(var i in this.state['events'])
                 {
@@ -97,6 +87,7 @@ class EventsBox extends TextBox
                     otherInfo={<OtherInfo info={[currentValue['date'], currentValue['time']]}
                     className="date-and-time" />}></TextButton>)
                 }
+                console.log(textButtons)
                 return textButtons
             
         }
@@ -126,6 +117,28 @@ class EventsBox extends TextBox
         {
             this.setState({'filterValue': event.target.value})
         }
+
+    shouldComponentUpdate(nextProps, nextState)
+    {
+        if(nextState['filterValue'] !== this.state['filterValue'])
+        {
+            //nextProps.type = nextState['filterValue']
+            //nextProps.title = nextProps.filterValue
+            return true
+        }
+
+        if(nextState['mode'] !== this.state['mode'])
+        {
+            return true
+        }
+
+        if(nextProps !== this.props)
+        {
+            return true
+        }
+        return true
+        
+    }
 
 
 

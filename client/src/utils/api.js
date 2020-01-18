@@ -21,6 +21,7 @@ export async function getEventInformation(type)
     }
     var fetchRes = await fetch(targetURL)
     var eventJSON = await fetchRes.json()
+    //console.log(eventJSON)
     return eventJSON
     //res.json()).then(data => {return Promise.resolve(data)}))
 }
