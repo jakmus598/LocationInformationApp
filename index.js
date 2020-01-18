@@ -128,6 +128,36 @@ app.get('/weather', async (req, res) => {
 
 })
 
+/**
+   * Parses events so that necessary event information is returned
+   */
+  function parseEvents(jsonRes)
+  {
+    //Put the necessary key/value pairs into an array and return it
+    var eventInformation = []
+    for(var i in jsonRes['_embedded']['events'])
+    {
+
+      //Get name, url to buy tickets
+      name = jsonRes['_embedded']['events'][i]['name']
+      url = jsonRes['_embedded']['events'][i]['url']
+
+      //Modify date so that it appears in month/day format (excludes year)
+      date = jsonRes['_embedded']['events'][i]['dates']['start']['localDate']
+      date = convertDate(date)
+      
+      //Get time and convert it from military
+      time = jsonRes['_embedded']['events'][i]['dates']['start']['localTime']
+      time = convertTime(time)
+
+      //Store all information in a single Object
+      var basicInformation = {'name': name, 'url': url, 'date': date, 'time': time}
+      //'date': date, 'time': time}
+      eventInformation.push(basicInformation)
+    }
+    return eventInformation
+  }
+
 app.get('/trendingTweets', async (req, res) => {
   //TODO: Use Yahoo database to obtain user's WOEID
   var fetchTweets = await fetch('https://api.twitter.com/1.1/trends/place.json?id=2379574', {
@@ -203,33 +233,43 @@ app.get('/events', async (req, res, error) => {
     //Get the response of making the API call to TicketMaster
     //TODO: Obtain city name from entered zip code (allows for better results in this API)
     var fetchResTicketMaster = await fetch('https://app.ticketmaster.com/discovery/v2/events.json?apikey=' + TICKETMASTER_API_KEY + 
-    '&city=Chicago&stateCode=IL&endDateTime=2020-01-17')
+    '&city=Chicago&stateCode=IL&endDateTime=2020-01-18T12:00:00Z')
     //TODO: Get it working so that it sorts by date &sort=date,asc')
     //&city=Chicago&stateCode=IL&sort=date,asc
     //Conert that response to a JSON object (returns a promise)
     var jsonRes = await fetchResTicketMaster.json()
-    //Put the necessary key/value pairs into an array and return it
-    var eventInformation = []
-    for(var i in jsonRes['_embedded']['events'])
-    {
+    var eventInformation = parseEvents(jsonRes)
+    return res.send(eventInformation)
+})
 
-      //Get name, url to buy tickets
-      name = jsonRes['_embedded']['events'][i]['name']
-      url = jsonRes['_embedded']['events'][i]['url']
+  app.get('/events/music', async (req, res, error) => {
+    //Get the response of making the API call to TicketMaster
+    //TODO: Obtain city name from entered zip code (allows for better results in this API)
+    var fetchResTicketMaster = await fetch('https://app.ticketmaster.com/discovery/v2/events.json?apikey=' + TICKETMASTER_API_KEY + 
+    '&city=Chicago&stateCode=IL&endDateTime=2020-01-18T12:00:00ZclassificationName=music')
+    //TODO: Get it working so that it sorts by date &sort=date,asc')
+    //&city=Chicago&stateCode=IL&sort=date,asc
+    //Conert that response to a JSON object (returns a promise)
+    var jsonRes = await fetchResTicketMaster.json()
+    var eventInformation = parseEvents(jsonRes)
+    return res.send(eventInformation)
+})
 
-      //Modify date so that it appears in month/day format (excludes year)
-      date = jsonRes['_embedded']['events'][i]['dates']['start']['localDate']
-      date = convertDate(date)
-      
-      //Get time and convert it from military
-      time = jsonRes['_embedded']['events'][i]['dates']['start']['localTime']
-      time = convertTime(time)
+app.get('/events/sports', async (req, res, error) => {
+  //Get the response of making the API call to TicketMaster
+  //TODO: Obtain city name from entered zip code (allows for better results in this API)
+  var fetchResTicketMaster = await fetch('https://app.ticketmaster.com/discovery/v2/events.json?apikey=' + TICKETMASTER_API_KEY + 
+  '&city=Chicago&stateCode=IL&endDateTime=2020-01-18T12:00:00Z&classificationName=sports')
+  //TODO: Get it working so that it sorts by date &sort=date,asc')
+  //&city=Chicago&stateCode=IL&sort=date,asc
+  //Conert that response to a JSON object (returns a promise)
+  var jsonRes = await fetchResTicketMaster.json()
+  var eventInformation = parseEvents(jsonRes)
+  return res.send(eventInformation)
+})
 
-      //Store all information in a single Object
-      var basicInformation = {'name': name, 'url': url, 'date': date, 'time': time}
-      //'date': date, 'time': time}
-      eventInformation.push(basicInformation)
-    }
+
+
 
     //Get Yelp event information
     /**var fetchYelpEvents = await fetch('https://api.yelp.com/v3/events?location=60015', {
@@ -247,8 +287,7 @@ app.get('/events', async (req, res, error) => {
       headers: {'Authorization': 'Bearer ' + keys.yelpAPIKey}})
     var yelpJSONRes = */
 
-    return res.send(eventInformation)
-  })
+
   
 
   app.get('/places/restaurants', async(req, res) => {

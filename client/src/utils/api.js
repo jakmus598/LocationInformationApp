@@ -8,9 +8,18 @@ var fetch = require('node-fetch')
 */
 const API_URL = 'http://location-wizard.herokuapp.com'
 
-export async function getEventInformation()
+export async function getEventInformation(type)
 {
-    var fetchRes = await fetch(API_URL + '/events')
+    var targetURL = ''
+    if(type === 'all')
+    {
+        targetURL = API_URL + '/events'
+    }
+    else
+    {
+        targetURL = API_URL + '/events/' + type
+    }
+    var fetchRes = await fetch(targetURL)
     var eventJSON = await fetchRes.json()
     return eventJSON
     //res.json()).then(data => {return Promise.resolve(data)}))

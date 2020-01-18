@@ -15,16 +15,17 @@ class EventsBox extends TextBox
     constructor(props)
     {
         super(props)
-        this.state = {}
+        //this.state['filterValue'] = 'all'
+        this.recordChange = this.recordChange.bind(this)
     }
 
     async getEvents()
     {
-        var events = await getEventInformation()
+        var events = await getEventInformation(this.state['filterValue'])
         /**
          * If state = preview, only show first five elements. Otherwise, display all.
          */
-        if(this.props.state === 'preview')
+        if(this.state['mode'] === 'preview')
         {
             var tempEvents = []
             for(var i=0; i < 5; i++)
@@ -36,20 +37,38 @@ class EventsBox extends TextBox
         this.setState({'events': events})
     }
 
+    shouldComponentUpdate(nextProps, nextState)
+    {
+        if(nextState['filterValue'] !== this.state['filterValue'])
+        {
+            //nextProps.type = nextState['filterValue']
+            //nextProps.title = nextProps.filterValue
+            return true
+        }
+
+        if(nextState['mode'] !== this.state['mode'])
+        {
+            return true
+        }
+
+        return false
+    }
+
     render()
     {
         //console.log(getEventInformation())
         this.getEvents()
         //console.log(this.state['events'])
 
-        return (<TextBox cardClass="card" className="text-box" title="Upcoming Events" state={{'mode': "preview"}}> 
+        return (<TextBox className="text-box" title={this.props.title} state={{'mode': this.state['mode']}}
+                filterList={this.getFilterList()}> 
             {   
                 this.state['events'] && this.getEventsArray()
             }
             
             </TextBox>
                 )
-                
+     
         
             
             
@@ -81,6 +100,35 @@ class EventsBox extends TextBox
                 return textButtons
             
         }
+
+        /**
+         * Creates the list of options for the filter button
+         */
+        getFilterList()
+        {
+            return(
+                <select className="filter-button" value={this.state['filterValue']} onChange={this.recordChange}>
+                    filter
+                    <option value="all">All</option>
+                    <option value="music">Music</option>
+                    <option value="sports">Sports</option>
+                    <option value="arts">Arts</option>
+                    <option value="family">Family</option>
+                    <option value="film">Film</option>
+                </select>
+            )
+        }
+
+        /**
+         * Resets filterValue when a new option is selected
+         */
+        recordChange(event)
+        {
+            this.setState({'filterValue': event.target.value})
+        }
+
+
+
         /**
          * otherInfo={<OtherInfo info={'[currentValue[date]', 'currentValue[time]']}
                     className="date-and-time" />}
