@@ -22,7 +22,7 @@ class EventsBox extends TextBox
     async getEvents()
     {
         var events = await getEventInformation(this.state['filterValue'])
-        console.log('events: ' + events)
+        //console.log('events: ' + events)
         //console.log(this.state['filterValue'])
         /**
          * If state = preview, only show first five elements. Otherwise, display all.
@@ -69,7 +69,7 @@ class EventsBox extends TextBox
 
         getEventsArray()
         {   
-                console.log('Called')
+                //console.log('Called')
                 //console.log(this.state['events'])
                 var textButtons = []
                 for(var i in this.state['events'])
@@ -87,7 +87,7 @@ class EventsBox extends TextBox
                     otherInfo={<OtherInfo info={[currentValue['date'], currentValue['time']]}
                     className="date-and-time" />}></TextButton>)
                 }
-                console.log(textButtons)
+                //console.log(textButtons)
                 return textButtons
             
         }

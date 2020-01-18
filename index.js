@@ -10,6 +10,16 @@ var jsonParser = require('parse-json')
 var cors = require('cors')
 var crypto = require('crypto')
 
+/**
+ * Set up MongoDB connection
+ */
+var mongoose = require('mongoose')
+require('./Models/User')
+var mongoDB = 'mongodb://127.0.0.1/LocationWizardUsers'
+mongoose.connect(keys.MONGO_URI, {useNewUrlParser: true})
+//mongoose.connect(mongoDB, {useNewUrlParser: true})
+//console.log(mongoose.connection)
+
 
 const PORT = process.env.PORT || 5000
 //const PORT = 5000
@@ -107,10 +117,10 @@ passport.use(new TwitterStrategy({
     accessToken: TWITTER_ACCESS_TOKEN,
     tokenSecret: TWITTER_TOKEN_SECRET,
     //callbackURL - Where user is redirected to after request is confirmed
-    callbackURL: '/authenticate/twitter' 
+    callbackURL: '/login/twitter' 
 }, //(accessToken) => console.log(accessToken)))
 function(accessToken, tokenSecret, profile, done) {
-    console.log('functikon executed')
+    console.log(profile)
     //User.findOrCreate(..., function(err, user) {
       //if (err) { return done(err); }
       //done(null, user);
@@ -118,7 +128,7 @@ function(accessToken, tokenSecret, profile, done) {
   }
 ))
 
-app.get('/authenticate/twitter', passport.authenticate('twitter'))
+app.get('/login/twitter', passport.authenticate('twitter'))
 
 app.get('/weather', async (req, res) => {
 
