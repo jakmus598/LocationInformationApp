@@ -146,6 +146,10 @@ app.get('/weather', async (req, res) => {
   {
     //Put the necessary key/value pairs into an array and return it
     var eventInformation = []
+    if(!jsonRes['_embedded'])
+    {
+      console.log(jsonRes)
+    }
     for(var i in jsonRes['_embedded']['events'])
     {
 
