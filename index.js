@@ -13,10 +13,11 @@ var crypto = require('crypto')
 /**
  * Set up MongoDB connection
  */
-var mongoose = require('mongoose')
+/**var mongoose = require('mongoose')
 require('./Models/User')
 var mongoDB = 'mongodb://127.0.0.1/LocationWizardUsers'
 mongoose.connect(keys.MONGO_URI, {useNewUrlParser: true})
+*/
 //mongoose.connect(mongoDB, {useNewUrlParser: true})
 //console.log(mongoose.connection)
 

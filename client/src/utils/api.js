@@ -9,7 +9,7 @@ const CORS_URL = 'http://cors-anywhere.herokuapp.com/'
 /**const API_URL = process.env.NODE_ENV === 'production' ? 
 'http://location-wizard.herokuapp.com' : 'http://localhost:5000'
 */
-const API_URL = CORS_URL + 'http://location-wizard.herokuapp.com'
+const API_URL = 'http://location-wizard.herokuapp.com'
 
 
 export async function getEventInformation(type)
