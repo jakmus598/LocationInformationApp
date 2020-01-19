@@ -17,9 +17,10 @@ class EventsBox extends TextBox
         super(props)
         //this.state['filterValue'] = 'all'
         this.recordChange = this.recordChange.bind(this)
+
     }
 
-    async getEvents()
+    getEvents = async() =>
     {
         var events = await getEventInformation(this.state['filterValue'])
         //console.log('events: ' + events)
@@ -45,7 +46,7 @@ class EventsBox extends TextBox
     render()
     {
         //console.log(getEventInformation())
-        this.getEvents()
+        //this.getEvents()
         //console.log(this.state['events'])
 
         return (<TextBox className="text-box" title={this.props.title} state={{'mode': this.state['mode']}}
@@ -115,6 +116,7 @@ class EventsBox extends TextBox
          */
         recordChange(event)
         {
+            this.getEvents()
             this.setState({'filterValue': event.target.value})
         }
 
