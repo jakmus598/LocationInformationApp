@@ -17,6 +17,7 @@ class EventsBox extends TextBox
         super(props)
         //this.state['filterValue'] = 'all'
         this.recordChange = this.recordChange.bind(this)
+        this.getEvents()
 
     }
 
@@ -50,7 +51,7 @@ class EventsBox extends TextBox
         //console.log(this.state['events'])
 
         return (<TextBox className="text-box" title={this.props.title} state={{'mode': this.state['mode']}}
-                filterList={this.getFilterList()} buttons={this.getEventsArray()}> 
+                filterList={this.getFilterList()}> 
             {   
                 this.state['events'] && this.getEventsArray()
             }
@@ -116,8 +117,11 @@ class EventsBox extends TextBox
          */
         recordChange(event)
         {
-            this.getEvents()
+            console.log(event.target.value)
             this.setState({'filterValue': event.target.value})
+            console.log(this.state['filterValue'])
+            //console.log(event.target.value)
+            this.getEvents()
         }
 
     shouldComponentUpdate(nextProps, nextState)

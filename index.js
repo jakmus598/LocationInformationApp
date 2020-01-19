@@ -129,6 +129,23 @@ function(accessToken, tokenSecret, profile, done) {
   }
 ))
 
+/**
+ * A function to parse Yelp data
+ */
+function parseYelp(jsonRes)
+{
+  var information = []
+  for(var i in jsonRes['businesses'])
+  {
+    var name = jsonRes['businesses'][i]['name']
+    var rating = jsonRes['businesses'][i]['rating']
+    var url = jsonRes['businesses'][i]['url']
+    information.push({'name': name, 'rating': rating, 'url': url})
+  }
+  return information
+}
+
+
 app.get('/login/twitter', passport.authenticate('twitter'))
 
 app.get('/weather', async (req, res) => {
@@ -292,10 +309,17 @@ app.get('/events/family', async(req, res, error) => {
   return res.send(eventInformation)
 })
 
+app.get('/places/bars', async(req, res, error) => {
+  var fetchResBars = await fetch('https://api.yelp.com/v3/businesses/search?categories=bars&location=60015', {
+    headers: {'Authorization': 'Bearer ' + YELP_API_KEY}})
 
+  var jsonRes = await fetchResBars.json()
 
+  //Parse the JSON accordingly
+  var barInformation = []
+  return res.send(parseYelp(jsonRes))
 
-
+})
 
     //Get Yelp event information
     /**var fetchYelpEvents = await fetch('https://api.yelp.com/v3/events?location=60015', {
