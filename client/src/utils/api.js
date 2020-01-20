@@ -58,7 +58,7 @@ export async function getClubInformation(type)
     if(type === 'all')
     {
         //TODO: Organize clubs by the most popular (no default 'clubs' category on Yelp)
-        targetURL = API_URL + '/clubs/social_clubs'
+        targetURL = API_URL + '/clubs/socialclubs'
     }
     else
     {

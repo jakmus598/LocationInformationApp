@@ -5,6 +5,7 @@ import TextBox from './TextBox'
 import TextButton from './TextButton'
 import EventsBox from './EventsBox'
 import BarsBox from './BarsBox'
+import ClubsBox from './ClubsBox'
 import {getEventInformation} from '../utils/api'
 
 class App extends Component
@@ -14,6 +15,9 @@ class App extends Component
         super(props)
     }
 
+    //TODO: Create one component called PlacesBox and pass them each parameters
+    //to use below
+
     render()
     {
         return(
@@ -21,6 +25,7 @@ class App extends Component
                 <h2 className="site-title">Location Wizard</h2>
                <EventsBox state={{'mode': 'preview', 'filterValue': 'all'}} title="Events"></EventsBox>
                <BarsBox state={{'mode': 'preview', 'filterValue': 'all'}} title="Bars"></BarsBox>
+               <ClubsBox state={{'mode': 'preview', 'filterValue': 'all'}} title="Bars"></ClubsBox>
         </div>
         )
     }

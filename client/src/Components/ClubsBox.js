@@ -5,11 +5,11 @@ import React, {Component} from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
 import TextBox from './TextBox'
 import TextButton from './TextButton'
-import {getBarInformation} from '../utils/api'
+import {getClubInformation} from '../utils/api'
 var fetch = require('node-fetch')
 
 
-class BarsBox extends TextBox
+class ClubsBox extends TextBox
 {
     constructor(props)
     {
@@ -20,24 +20,24 @@ class BarsBox extends TextBox
 
     }
 
-    getBars = async(filterValue) =>
+    getClubs = async(filterValue) =>
     {
-        var bars = await getClubInformation(filterValue)
+        var clubs = await getClubInformation(filterValue)
         //console.log('events: ' + events)
         //console.log(this.state['filterValue'])
         /**
          * If state = preview, only show first five elements. Otherwise, display all.
          */
-        if(this.state['mode'] === 'preview' && bars.length > 5)
+        if(this.state['mode'] === 'preview' && clubs.length > 5)
         {
-            var tempBars = []
+            var tempClubs = []
             for(var i=0; i < 5; i++)
             {
-                tempBars.push(bars[i])
+                tempClubs.push(clubs[i])
             }
-            bars = tempBars
+            clubs = tempClubs
         }
-        this.setState({'bars': bars})
+        this.setState({'clubs': clubs})
     }
     
 
@@ -79,7 +79,7 @@ class BarsBox extends TextBox
         return (<TextBox className="text-box" title={this.props.title} state={{'mode': this.state['mode']}}
                 filterList={this.getFilterList()}> 
             {   
-                this.state['bars'] && this.getBarsArray()
+                this.state['clubs'] && this.getClubsArray()
             }
             
             </TextBox>
@@ -95,17 +95,17 @@ class BarsBox extends TextBox
                 */
         }
 
-        getBarsArray()
+        getClubsArray()
         {   
                 //console.log('Called')
                 //console.log(this.state['events'])
                 var textButtons = []
-                for(var i in this.state['bars'])
+                for(var i in this.state['clubs'])
                 {
                     //TODO: Remove all events whose date is already passed
 
                     //Use a variable for the current event in the array
-                    var currentValue = this.state['bars'][i]
+                    var currentValue = this.state['clubs'][i]
                     //console.log(currentValue['date'])
                     //console.log(currentValue['time'])
 
@@ -129,9 +129,10 @@ class BarsBox extends TextBox
                 <select className="filter-button" value={this.state['filterValue']} onChange={this.recordChange}>
                     filter
                     <option value="all">All</option>
-                    <option value="pubs">Pubs</option>
-                    <option value="sportsbars">Sports bars</option>
-                    <option value="winebars">Wine bars</option>
+                    <option value="socialclubs">Social clubs</option>
+                    <option value="comedyclubs">Comedy clubs</option>
+                    <option value="danceclubs">Dance clubs</option>
+                    <option value="jazzclubs">Jazz and blues</option>
                 </select>
             )
         }
@@ -179,7 +180,7 @@ class BarsBox extends TextBox
        console.log('componentDidUpdate state: ' + this.state['filterValue'])
        if(this.state['filterValue'] !== prevState['filterValue'])
        {
-           this.getBars(this.state['filterValue'])
+           this.getClubs(this.state['filterValue'])
        }
    }
 
@@ -222,7 +223,7 @@ class BarsBox extends TextBox
 
 
 
-export default BarsBox
+export default ClubsBox
 
 
 //return(<TextButton name={events[i]['name']} url={events[i]['url']}></TextButton>)
