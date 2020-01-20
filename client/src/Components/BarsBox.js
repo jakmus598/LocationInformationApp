@@ -17,7 +17,7 @@ class BarsBox extends TextBox
         super(props)
         //this.state['filterValue'] = 'all'
         this.recordChange = this.recordChange.bind(this)
-        this.getEvents()
+        this.getBars()
 
     }
 

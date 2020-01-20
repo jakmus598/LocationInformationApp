@@ -37,11 +37,11 @@ export async function getBarInformation(type)
     var targetURL = ''
     if(type === 'all')
     {
-        targetURL = API_URL + '/places/bars'
+        targetURL = API_URL + '/bars'
     }
     else
     {
-        targetURL = API_URL + '/places/bars/' + type
+        targetURL = API_URL + '/bars/' + type
     }
     var fetchRes = await fetch(targetURL)
     console.log(fetchRes)
