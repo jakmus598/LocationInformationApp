@@ -17,7 +17,7 @@ class EventsBox extends TextBox
         super(props)
         //this.state['filterValue'] = 'all'
         this.recordChange = this.recordChange.bind(this)
-        this.getEvents(this.state['filterValue'])
+        this.getEvents()
 
     }
 
@@ -43,6 +43,33 @@ class EventsBox extends TextBox
     
 
     //this.state['events'] && this.getEventsArray()
+
+    shouldComponentUpdate(nextProps, nextState)
+    {
+        console.log('Called')
+        if(nextState['filterValue'] !== this.state['filterValue'])
+        {
+            //nextProps.type = nextState['filterValue']
+            //nextProps.title = nextProps.filterValue
+            console.log('shouldComponentUpdate (current state): ' + this.state['filterValue'])
+            console.log('shouldComponentUpdate (next state): ' + nextState['filterValue'])
+            this.getEvents(nextState['filterValue'])
+            return true
+        }
+
+        if(nextState['mode'] !== this.state['mode'])
+        {
+            return true
+        }
+
+        if(nextProps !== this.props)
+        {
+            return true
+        }
+        return true
+        
+    }
+
 
     render()
     {
@@ -117,20 +144,11 @@ class EventsBox extends TextBox
          */
         recordChange(event)
         {
-            //console.log(event.target.value)
+            console.log(event.target.value)
             this.setState({'filterValue': event.target.value})
-            //console.log(this.state['filterValue'])
+           // console.log(this.state['filterValue'])
             //console.log(event.target.value)
             //this.getEvents()
-        }
-
-        componentDidUpdate(prevProps, prevState, snapshot)
-        {
-            console.log('componentDidUpdate state: ' + this.state['filterValue'])
-            if(this.state['filterValue'] !== prevState['filterValue'])
-            {
-                this.getEvents(this.state['filterValue'])
-            }
         }
 
     /**shouldComponentUpdate(nextProps, nextState)
@@ -139,6 +157,9 @@ class EventsBox extends TextBox
         {
             //nextProps.type = nextState['filterValue']
             //nextProps.title = nextProps.filterValue
+            console.log('shouldComponentUpdate (current state): ' + this.state['filterValue'])
+            console.log('shouldComponentUpdate (next state): ' + nextState['filterValue'])
+            this.getEvents(nextState['filterValue'])
             return true
         }
 
@@ -155,6 +176,12 @@ class EventsBox extends TextBox
         
     }
     */
+
+    componentDidUpdate(prevProps, prevState, snapshot)
+    {
+        console.log(this.state['filterValue'])
+        //this.getEvents()
+    }
 
 
 

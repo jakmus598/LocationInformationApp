@@ -32,3 +32,22 @@ export async function getEventInformation(type)
     //res.json()).then(data => {return Promise.resolve(data)}))
 }
 
+export async function getPlaceInformation(type)
+{
+    var targetURL = ''
+    if(type === 'all')
+    {
+        targetURL = API_URL + '/places/bars'
+    }
+    {
+        targetURL = API_URL + '/events/' + type
+    }
+    var fetchRes = await fetch(targetURL)
+    console.log(fetchRes)
+    var eventJSON = await fetchRes.json()
+    console.log(eventJSON)
+    //console.log(eventJSON)
+    return eventJSON
+    //res.json()).then(data => {return Promise.resolve(data)}))
+}
+
