@@ -138,8 +138,8 @@ function parseYelp(jsonRes)
   for(var i in jsonRes['businesses'])
   {
     var name = jsonRes['businesses'][i]['name']
-    var address = jsonRes['businesses'][i]['address1']
-    var cityState = jsonRes['businesses'][i]['city'] + ', ' + jsonRes['businesses'][i][state]
+    var address = jsonRes['businesses'][i]['location']['address1']
+    var cityState = jsonRes['businesses'][i]['location']['city'] + ', ' + jsonRes['businesses'][i]['location']['state']
     var url = jsonRes['businesses'][i]['url']
     information.push({'name': name, 'address': address, 'cityState': cityState, 'url': url})
   }
