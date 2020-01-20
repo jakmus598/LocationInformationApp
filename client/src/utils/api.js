@@ -45,10 +45,31 @@ export async function getBarInformation(type)
     }
     var fetchRes = await fetch(targetURL)
     console.log(fetchRes)
-    var eventJSON = await fetchRes.json()
-    console.log(eventJSON)
+    var barsJSON = await fetchRes.json()
+    console.log(barsJSON)
     //console.log(eventJSON)
-    return eventJSON
+    return barsJSON
+    //res.json()).then(data => {return Promise.resolve(data)}))
+}
+
+export async function getClubInformation(type)
+{
+    var targetURL = ''
+    if(type === 'all')
+    {
+        //TODO: Organize clubs by the most popular (no default 'clubs' category on Yelp)
+        targetURL = API_URL + '/clubs/social_clubs'
+    }
+    else
+    {
+        targetURL = API_URL + '/clubs/' + type
+    }
+    var fetchRes = await fetch(targetURL)
+    console.log(fetchRes)
+    var clubsJSON = await fetchRes.json()
+    console.log(clubsJSON)
+    //console.log(eventJSON)
+    return clubsJSON
     //res.json()).then(data => {return Promise.resolve(data)}))
 }
 

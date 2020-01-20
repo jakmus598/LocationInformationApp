@@ -367,6 +367,52 @@ app.get('/bars/winebars', async(req, res, error) => {
   return res.send(parseYelp(jsonRes))
 })
 
+app.get('/clubs/socialclubs', async(req, res, error) => {
+  var fetchResClubs = await fetch('https://api.yelp.com/v3/businesses/search?categories=social_clubs&location=60015', {
+    headers: {'Authorization': 'Bearer ' + YELP_API_KEY}})
+
+  var jsonRes = await fetchResClubs.json()
+
+  //Parse the JSON accordingly
+  var clubInformation = []
+  return res.send(parseYelp(jsonRes))
+})
+
+app.get('/clubs/comedyclubs', async(req, res, error) => {
+  var fetchResClubs = await fetch('https://api.yelp.com/v3/businesses/search?categories=comedyclubs&location=60015', {
+    headers: {'Authorization': 'Bearer ' + YELP_API_KEY}})
+
+  var jsonRes = await fetchResClubs.json()
+
+  //Parse the JSON accordingly
+  var clubInformation = []
+  return res.send(parseYelp(jsonRes))
+})
+
+app.get('/clubs/danceclubs', async(req, res, error) => {
+  var fetchResClubs = await fetch('https://api.yelp.com/v3/businesses/search?categories=danceclubs&location=60015', {
+    headers: {'Authorization': 'Bearer ' + YELP_API_KEY}})
+
+  var jsonRes = await fetchResClubs.json()
+
+  //Parse the JSON accordingly
+  var clubInformation = []
+  return res.send(parseYelp(jsonRes))
+})
+
+app.get('/clubs/jazzclubs', async(req, res, error) => {
+  var fetchResClubs = await fetch('https://api.yelp.com/v3/businesses/search?categories=jazzandblues&location=60015', {
+    headers: {'Authorization': 'Bearer ' + YELP_API_KEY}})
+
+  var jsonRes = await fetchResClubs.json()
+
+  //Parse the JSON accordingly
+  var clubInformation = []
+  return res.send(parseYelp(jsonRes))
+})
+
+
+
 
 
     //Get Yelp event information
