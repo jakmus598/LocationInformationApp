@@ -1,17 +1,16 @@
-//Note that this class is very similar to EventsBox. As such, a majority of the CSS will remain the same
-import '../CSS/EventsBox.css'
+import '../CSS/BarsBox.css'
 import OtherInfo from './OtherInfo'
 import {Card, CardTitle, ListGroup} from 'reactstrap'
 import React, {Component} from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
 import TextBox from './TextBox'
 import TextButton from './TextButton'
-import {getEventInformation} from '../utils/api'
+import {getBarInformation} from '../utils/api'
 var fetch = require('node-fetch')
 
 
 
-class EventsBox extends TextBox
+class BarsBox extends TextBox
 {
     constructor(props)
     {
@@ -22,24 +21,24 @@ class EventsBox extends TextBox
 
     }
 
-    getEvents = async(filterValue) =>
+    getBars = async(filterValue) =>
     {
-        var events = await getEventInformation(filterValue)
+        var bars = await getBarInformation(filterValue)
         //console.log('events: ' + events)
         //console.log(this.state['filterValue'])
         /**
          * If state = preview, only show first five elements. Otherwise, display all.
          */
-        if(this.state['mode'] === 'preview')
+        if(this.state['mode'] === 'preview' && bars.length > 5)
         {
-            var tempEvents = []
+            var tempBars = []
             for(var i=0; i < 5; i++)
             {
-                tempEvents.push(events[i])
+                tempBars.push(bars[i])
             }
-            events = tempEvents
+            bars = tempBars
         }
-        this.setState({'events': events})
+        this.setState({'bars': bars})
     }
     
 
@@ -47,14 +46,14 @@ class EventsBox extends TextBox
 
     shouldComponentUpdate(nextProps, nextState)
     {
-        console.log('Called')
+        //console.log('Called')
         if(nextState['filterValue'] !== this.state['filterValue'])
         {
             //nextProps.type = nextState['filterValue']
             //nextProps.title = nextProps.filterValue
-            console.log('shouldComponentUpdate (current state): ' + this.state['filterValue'])
-            console.log('shouldComponentUpdate (next state): ' + nextState['filterValue'])
-            this.getEvents(nextState['filterValue'])
+            //console.log('shouldComponentUpdate (current state): ' + this.state['filterValue'])
+            //console.log('shouldComponentUpdate (next state): ' + nextState['filterValue'])
+            //this.getEvents(nextState['filterValue'])
             return true
         }
 
@@ -81,7 +80,7 @@ class EventsBox extends TextBox
         return (<TextBox className="text-box" title={this.props.title} state={{'mode': this.state['mode']}}
                 filterList={this.getFilterList()}> 
             {   
-                this.state['events'] && this.getEventsArray()
+                this.state['bars'] && this.getBarsArray()
             }
             
             </TextBox>
@@ -97,25 +96,25 @@ class EventsBox extends TextBox
                 */
         }
 
-        getEventsArray()
+        getBarsArray()
         {   
                 //console.log('Called')
                 //console.log(this.state['events'])
                 var textButtons = []
-                for(var i in this.state['events'])
+                for(var i in this.state['bars'])
                 {
                     //TODO: Remove all events whose date is already passed
 
                     //Use a variable for the current event in the array
-                    var currentValue = this.state['events'][i]
+                    var currentValue = this.state['bars'][i]
                     //console.log(currentValue['date'])
                     //console.log(currentValue['time'])
 
                     //Create a new TextButton with the name, and url of the event
                     //Use an OtherInfo component to store data relating to date and time of event
                     textButtons.push(<TextButton name={currentValue['name']} url={currentValue['url']}
-                    otherInfo={<OtherInfo info={[currentValue['date'], currentValue['time']]}
-                    className="date-and-time" />}></TextButton>)
+                    otherInfo={<OtherInfo info={[currentValue['address'], currentValue['cityState']]}
+                    className="address" />}></TextButton>)
                 }
                 //console.log(textButtons)
                 return textButtons
@@ -131,11 +130,9 @@ class EventsBox extends TextBox
                 <select className="filter-button" value={this.state['filterValue']} onChange={this.recordChange}>
                     filter
                     <option value="all">All</option>
-                    <option value="music">Music</option>
-                    <option value="sports">Sports</option>
-                    <option value="arts">Arts</option>
-                    <option value="family">Family</option>
-                    <option value="film">Film</option>
+                    <option value="pubs">Pubs</option>
+                    <option value="sportsbars">Sports bars</option>
+                    <option value="winebars">Wine bars</option>
                 </select>
             )
         }
@@ -178,11 +175,14 @@ class EventsBox extends TextBox
     }
     */
 
-    componentDidUpdate(prevProps, prevState, snapshot)
-    {
-        console.log(this.state['filterValue'])
-        //this.getEvents()
-    }
+   componentDidUpdate(prevProps, prevState, snapshot)
+   {
+       console.log('componentDidUpdate state: ' + this.state['filterValue'])
+       if(this.state['filterValue'] !== prevState['filterValue'])
+       {
+           this.getBars(this.state['filterValue'])
+       }
+   }
 
 
 
@@ -223,7 +223,7 @@ class EventsBox extends TextBox
 
 
 
-export default EventsBox
+export default BarsBox
 
 
 //return(<TextButton name={events[i]['name']} url={events[i]['url']}></TextButton>)

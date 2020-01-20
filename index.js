@@ -138,9 +138,10 @@ function parseYelp(jsonRes)
   for(var i in jsonRes['businesses'])
   {
     var name = jsonRes['businesses'][i]['name']
-    var rating = jsonRes['businesses'][i]['rating']
+    var address = jsonRes['businesses'][i]['address1']
+    var cityState = jsonRes['businesses'][i]['city'] + ', ' + jsonRes['businesses'][i][state]
     var url = jsonRes['businesses'][i]['url']
-    information.push({'name': name, 'rating': rating, 'url': url})
+    information.push({'name': name, 'address': address, 'cityState': cityState, 'url': url})
   }
   return information
 }
@@ -322,7 +323,7 @@ app.get('/events/family', async(req, res, error) => {
   return res.send(eventInformation)
 })
 
-app.get('/places/bars', async(req, res, error) => {
+app.get('/bars', async(req, res, error) => {
   var fetchResBars = await fetch('https://api.yelp.com/v3/businesses/search?categories=bars&location=60015', {
     headers: {'Authorization': 'Bearer ' + YELP_API_KEY}})
 
@@ -331,8 +332,42 @@ app.get('/places/bars', async(req, res, error) => {
   //Parse the JSON accordingly
   var barInformation = []
   return res.send(parseYelp(jsonRes))
-
 })
+
+app.get('/bars/pubs', async(req, res, error) => {
+  var fetchResBars = await fetch('https://api.yelp.com/v3/businesses/search?categories=irish_pubs&location=60015', {
+    headers: {'Authorization': 'Bearer ' + YELP_API_KEY}})
+
+  var jsonRes = await fetchResBars.json()
+
+  //Parse the JSON accordingly
+  var barInformation = []
+  return res.send(parseYelp(jsonRes))
+})
+
+app.get('/bars/sportsbars', async(req, res, error) => {
+  var fetchResBars = await fetch('https://api.yelp.com/v3/businesses/search?categories=sportsbars&location=60015', {
+    headers: {'Authorization': 'Bearer ' + YELP_API_KEY}})
+
+  var jsonRes = await fetchResBars.json()
+
+  //Parse the JSON accordingly
+  var barInformation = []
+  return res.send(parseYelp(jsonRes))
+}) 
+
+app.get('/bars/winebars', async(req, res, error) => {
+  var fetchResBars = await fetch('https://api.yelp.com/v3/businesses/search?categories=wine_bars&location=60015', {
+    headers: {'Authorization': 'Bearer ' + YELP_API_KEY}})
+
+  var jsonRes = await fetchResBars.json()
+
+  //Parse the JSON accordingly
+  var barInformation = []
+  return res.send(parseYelp(jsonRes))
+})
+
+
 
     //Get Yelp event information
     /**var fetchYelpEvents = await fetch('https://api.yelp.com/v3/events?location=60015', {

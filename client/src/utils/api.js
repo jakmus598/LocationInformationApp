@@ -32,15 +32,16 @@ export async function getEventInformation(type)
     //res.json()).then(data => {return Promise.resolve(data)}))
 }
 
-export async function getPlaceInformation(type)
+export async function getBarInformation(type)
 {
     var targetURL = ''
     if(type === 'all')
     {
         targetURL = API_URL + '/places/bars'
     }
+    else
     {
-        targetURL = API_URL + '/events/' + type
+        targetURL = API_URL + '/places/bars/' + type
     }
     var fetchRes = await fetch(targetURL)
     console.log(fetchRes)

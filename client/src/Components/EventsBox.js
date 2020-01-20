@@ -29,7 +29,7 @@ class EventsBox extends TextBox
         /**
          * If state = preview, only show first five elements. Otherwise, display all.
          */
-        if(this.state['mode'] === 'preview')
+        if(this.state['mode'] === 'preview' && events.length > 5)
         {
             var tempEvents = []
             for(var i=0; i < 5; i++)
@@ -77,6 +77,7 @@ class EventsBox extends TextBox
                 for(var i in this.state['events'])
                 {
                     //TODO: Remove all events whose date is already passed
+                    console.log('Iteration: ' + i)
 
                     //Use a variable for the current event in the array
                     var currentValue = this.state['events'][i]
