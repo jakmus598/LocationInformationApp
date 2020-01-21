@@ -21,7 +21,7 @@ The ability to rate the nightlife in real time such that other users can determi
 not to go out.
 
 ## Get started
-Ensure you have the following installed on your computer
+This application uses the following packages
 * Node.js
 * React.js
 * Express.js
