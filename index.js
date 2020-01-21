@@ -211,11 +211,11 @@ app.get('/weather', async (req, res) => {
     //Organize eventInformation according to dateArray
     //Use a key/value pair to associate each element in eventInformation with a new position
     var datePosition = []
-    var tempElement = eventInformation[0]
+    var tempElementArray = [eventInformation[0]]
     for(var i in eventInformation)
     {
       //Find the value in dateArray then place it into its proper position
-      var position = dateArray.indexOf(tempElement['date'])
+      var position = dateArray.indexOf(tempElement[0]['date'])
       tempElement = eventInformation.splice(position, 1, eventInformation[i])
     }
 
