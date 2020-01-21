@@ -5,8 +5,10 @@
 </h1>
 
 <p align="center">
-  <a href="#about">About |</a>
-  <a href="#get-started">Get started |</a>
+  <a href="#about">About</a>
+  <span> |</span>
+  <a href="#get-started">Get started</a>
+  <span> |</span>
   <a href="#contact">Contact</a>
 </p>
 
