@@ -9,6 +9,7 @@ var fetch = require('node-fetch')
 var jsonParser = require('parse-json')
 var cors = require('cors')
 var crypto = require('crypto')
+var sort = require('sort-algorithms')
 
 /**
  * Set up MongoDB connection
@@ -158,12 +159,13 @@ app.get('/weather', async (req, res) => {
 })
 
 /**
-   * Parses events so that necessary event information is returned
+   * Parses and properly organizes events so that necessary event information is returned
    */
   function parseEvents(jsonRes)
   {
     //Put the necessary key/value pairs into an array and return it
     var eventInformation = []
+    var dateArray = []
     if(!jsonRes['_embedded'])
     {
       console.log(jsonRes)
@@ -187,7 +189,36 @@ app.get('/weather', async (req, res) => {
       var basicInformation = {'name': name, 'url': url, 'date': date, 'time': time}
       //'date': date, 'time': time}
       eventInformation.push(basicInformation)
+
+      //Parse date such that it can be compared numerically
+      dateSplit = date.split('/')
+      numDate = dateSplit[0] + dateSplit[1]
+      numDate = Number(numDate)
+
+      //Push each numDate to a separate array
+      dateArray.push(numDate)
     }
+    //Sort the date array
+    dateArray = sort.quickSort(dateArray)
+
+    //Convert the values in dateArray back to Strings so that they can be used in sorting
+    for(var i in dateArray)
+    {
+      dateArray[i] = dateArray[i].toString()
+      dateArray[i] = dateArray[i].substring(0, 1) + '/' + dateArray[i].substring(2, 3)
+    }
+    
+    //Organize eventInformation according to dateArray
+    //Use a key/value pair to associate each element in eventInformation with a new position
+    var datePosition = []
+    var tempElement = eventInformation[0]
+    for(var i in eventInformation)
+    {
+      //Find the value in dateArray then place it into its proper position
+      var position = dateArray.indexOf(tempElement['date'])
+      tempElement = eventInformation.splice(position, 1, eventInformation[i])
+    }
+
     return eventInformation
   }
 

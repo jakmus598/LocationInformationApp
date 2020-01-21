@@ -16,7 +16,7 @@ class ClubsBox extends TextBox
         super(props)
         //this.state['filterValue'] = 'all'
         this.recordChange = this.recordChange.bind(this)
-        this.getClubs()
+        this.getClubs(this.state['filterValue'])
 
     }
 

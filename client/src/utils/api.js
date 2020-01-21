@@ -3,7 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 var fetch = require('node-fetch')
 
 //A proxy to bypass cors
-const CORS_URL = 'http://cors-anywhere.herokuapp.com/'
+//const CORS_URL = 'http://cors-anywhere.herokuapp.com/'
 
 //The URLs at which the API can be fetched
 /**const API_URL = process.env.NODE_ENV === 'production' ? 
