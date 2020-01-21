@@ -16,7 +16,7 @@
 Nightlife Network is an application that allows you to view the nightlife scene in realtime.
 Enter in your location to be given a broad array of events, bars, clubs, and more near you.
 
-### Coming soon
+#### Coming soon
 The ability to rate the nightlife in real time such that other users can determine whether or
 not to go out.
 
