@@ -23,7 +23,7 @@ class App extends Component
     {
         return(
             <div>
-                <h2 className="site-title">Location Wizard</h2>
+                <h2 className="site-title">Nightlife Network</h2>
                 <InformationBox getInfo={getEventInformation} otherInfo={['date', 'time']} filterChoices=
                 {['all', 'music', 'sports', 'arts', 'family', 'film']} filterNames={['All', 'Music', 
                 'Sports', 'Arts', 'Family', 'Film']} title='Events'  state={{'mode': 'preview', 'filterValue': 'all'}} />
