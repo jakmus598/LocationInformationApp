@@ -22,7 +22,11 @@ class InformationBox extends TextBox
         super(props)
         this.recordChange = this.recordChange.bind(this)
         //Call the getInfo method to set state['info'] to its initial state
-        this.getInfo(this.state['filterValue'])
+
+        if(this.state['mode'] === 'preview')
+        {
+            this.getInfo(this.state['filterValue'])
+        }
 
     }
 
@@ -51,11 +55,13 @@ class InformationBox extends TextBox
     {
 
         return (<TextBox className="text-box" title={this.props.title} state={{'mode': this.state['mode']}}
-                filterList={this.getFilterList()}> 
-            {   
-                this.state['info'] && this.getInfoArray()
-            }
-            </TextBox>
+                filterList={this.getFilterList()} boxType={this.props.boxType}> 
+                {   
+                    this.state['info'] && this.getInfoArray()
+                }
+                </TextBox>
+                
+                
             )
         }
 

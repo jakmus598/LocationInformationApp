@@ -200,6 +200,7 @@ app.get('/weather', async (req, res) => {
     }
     //Sort the date array
     dateArray = sort.quickSort(dateArray)
+    console.log('Dates as numbers: ' + dateArray)
 
     //Convert the values in dateArray back to Strings so that they can be used in sorting
     for(var i in dateArray)
@@ -207,6 +208,9 @@ app.get('/weather', async (req, res) => {
       dateArray[i] = dateArray[i].toString()
       dateArray[i] = dateArray[i].substring(0, 1) + '/' + dateArray[i].substring(2, 3)
     }
+
+    console.log('Dates as strings: ' + dateArray)
+
     
     //Organize eventInformation according to dateArray
     //Use a key/value pair to associate each element in eventInformation with a new position

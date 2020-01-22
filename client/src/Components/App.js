@@ -1,6 +1,6 @@
 import '../CSS/App.css'
 import React, {Component} from 'react'
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route} from 'react-router-dom'
 import TextBox from './TextBox'
 import TextButton from './TextButton'
 import InformationBox from './InformationBox'
@@ -19,22 +19,39 @@ class App extends Component
     //TODO: Create one component called PlacesBox and pass them each parameters
     //to use below
 
+    //Set variables for each of the Information boxes to allow for easier routing
+    eventsBox = (mode) => {return (<InformationBox getInfo={getEventInformation} otherInfo={['date', 'time']} filterChoices=
+    {['all', 'music', 'sports', 'arts', 'family', 'film']} filterNames={['All', 'Music', 
+    'Sports', 'Arts', 'Family', 'Film']} title='Events' boxType="events"
+    state={{'mode': mode, 'filterValue': 'all'}} />)}
+
+    /**
+     * <InformationBox getInfo={getEventInformation} otherInfo={['date', 'time']} filterChoices=
+                {['all', 'music', 'sports', 'arts', 'family', 'film']} filterNames={['All', 'Music', 
+                'Sports', 'Arts', 'Family', 'Film']} title='Events' boxType="events"
+                 state={{'mode': 'preview', 'filterValue': 'all'}} />
+     */
     render()
     {
         return(
             <div>
                 <h2 className="site-title">Nightlife Network</h2>
-                <InformationBox getInfo={getEventInformation} otherInfo={['date', 'time']} filterChoices=
-                {['all', 'music', 'sports', 'arts', 'family', 'film']} filterNames={['All', 'Music', 
-                'Sports', 'Arts', 'Family', 'Film']} title='Events'  state={{'mode': 'preview', 'filterValue': 'all'}} />
+                {this.eventsBox('preview')}
+                 
+                 <Router>
+                 <Route path="/events" exact render={() => {
+                     return (<div>{this.eventsBox('preview')}</div>)
+                 }} />
+                 </Router>
+
 
                 <InformationBox getInfo={getBarInformation} otherInfo={['address', 'cityState']} filterChoices=
                 {['all', 'pubs', 'sportsbars', 'winebars']} filterNames={['All', 'Pubs', 
-                'Sports bars', 'Wine bars']} title='Bars'  state={{'mode': 'preview', 'filterValue': 'all'}} />
+                'Sports bars', 'Wine bars']} title='Bars' boxType="bars" state={{'mode': 'preview', 'filterValue': 'all'}} />
 
                 <InformationBox getInfo={getClubInformation} otherInfo={['address', 'cityState']} filterChoices=
                 {['all', 'socialclubs', 'comedyclubs', 'danceclubs']} filterNames={['All', 'Social', 
-                'Comedy', 'Dance']} title='Clubs'  state={{'mode': 'preview', 'filterValue': 'all'}} />
+                'Comedy', 'Dance']} title='Clubs' boxType='clubs' state={{'mode': 'preview', 'filterValue': 'all'}} />
         </div>
         )
     }

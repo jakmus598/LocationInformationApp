@@ -21,7 +21,13 @@ class TextBox extends Component
         return(
             <div className="box">
                 <div>
-                {this.props.filterList}
+                { () => {
+                    if(this.state['mode'] === 'preview')
+                    {
+                        return this.props.filterList
+                    }
+                 }
+              }
                 </div>
                 <Container>{this.props.title}
                 {this.props.children}
@@ -46,8 +52,8 @@ class TextBox extends Component
      {
         if(this.state['mode']==='preview')
         {
-            var link = 'http://localhost:3000/' + this.props.boxType
-            return(<a href={link} className="see-more">see more</a>)
+            var seeMoreLink = 'http://localhost:3000/' + this.props.boxType
+            return(<a href={seeMoreLink} className="see-more">See more</a>)
         }
      }
 }
