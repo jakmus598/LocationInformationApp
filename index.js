@@ -231,8 +231,6 @@ app.get('/weather', async (req, res) => {
     //Organize eventInformation according to dateArray
     //Use a key/value pair to associate each element in eventInformation with a new position
     //Use sortedEventInformation to store the organized values
-    var datePosition = []
-    var tempElementArray = [eventInformation[0]]
     var sortedEventInformation = []
 
     //Initialize sortedEventInformation with empty values
@@ -246,6 +244,27 @@ app.get('/weather', async (req, res) => {
       var position = dateArray.indexOf(eventInformation[i]['date'])
       console.log('eventInformation[date]: ' + eventInformation[i]['date'])
       console.log('Position: ' + position)
+
+      //Ensure that position isn't already occupied - if it is, find the next available spot
+      if(sortedEventInformation[position] !== 'undefined')
+      {
+        var increment = 1;
+        var openSpotFound = false
+        while(!openSpotFound)
+        {
+          if(sortedEventInformation[position + increment] === 'undefined')
+          {
+            position = position + increment
+            openSpotFound = true
+          }
+
+          else
+          {
+            increment += 1
+          }
+          
+        }
+      }
       sortedEventInformation[position] = eventInformation[i]
       /**console.log('Position: ' + position)
       tempElementArray = eventInformation.splice(position, 1, eventInformation[i])
