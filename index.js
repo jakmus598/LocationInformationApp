@@ -224,8 +224,15 @@ app.get('/weather', async (req, res) => {
     {
       //Find the value in dateArray then place it into its proper position
       var position = dateArray.indexOf(tempElementArray[0]['date'])
+      console.log('Position: ' + position)
       tempElementArray = eventInformation.splice(position, 1, tempElementArray[0])
+      console.log('-------')
+      for(var i in eventInformation)
+      {
+        console.log(eventInformation[i]['date'])
+      }
     }
+
     
     return eventInformation
   }
