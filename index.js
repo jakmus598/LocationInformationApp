@@ -218,23 +218,37 @@ app.get('/weather', async (req, res) => {
     
     //Organize eventInformation according to dateArray
     //Use a key/value pair to associate each element in eventInformation with a new position
+    //Use sortedEventInformation to store the organized values
     var datePosition = []
     var tempElementArray = [eventInformation[0]]
+    var sortedEventInformation = []
+
+    //Initialize sortedEventInformation with empty values
+    for(var i in eventInformation)
+    {
+      sortedEventInformation.push('undefined')
+    }
     for(var i in eventInformation)
     {
       //Find the value in dateArray then place it into its proper position
       var position = dateArray.indexOf(eventInformation[i]['date'])
-      console.log('Position: ' + position)
+      sortedEventInformation[position] = eventInformation[i]
+      /**console.log('Position: ' + position)
       tempElementArray = eventInformation.splice(position, 1, eventInformation[i])
-      console.log('tempElementArray date: ' + tempElementArray['date'])
+      console.log('tempElementArray date: ' + tempElementArray[0]['date'])
       console.log('-------')
       for(var i in eventInformation)
       {
         console.log(eventInformation[i]['date'])
       }
+      */
+
+      for(var i in sortedEventInformation)
+      {
+        console.log(sortedEventInformation[i]['date'])
+      }
     }
 
-    
     return eventInformation
   }
 
