@@ -242,14 +242,14 @@ app.get('/weather', async (req, res) => {
         console.log(eventInformation[i]['date'])
       }
       */
-
-      for(var i in sortedEventInformation)
-      {
-        console.log(sortedEventInformation[i]['date'])
-      }
     }
 
-    return eventInformation
+    for(var i in sortedEventInformation)
+    {
+      console.log(sortedEventInformation[i]['date'])
+    }
+
+    return sortedEventInformation
   }
 
 app.get('/trendingTweets', async (req, res) => {
