@@ -208,12 +208,12 @@ app.get('/weather', async (req, res) => {
     {
       dateArray[i] = dateArray[i].toString()
       
-      //Add the zero back that was removed when date was converted to number
+      //Add the zero back that was removed when date was converted to number (if month < 10)
       if(dateArray[i].charAt(0) !== '0' && dateArray[i].length < 4)
       {
         dateArray[i] = '0' + dateArray[i]
       }
-      dateArray[i] = dateArray[i].substring(0, 1) + '/' + dateArray[i].substring(2, 4)
+      dateArray[i] = dateArray[i].substring(0, 2) + '/' + dateArray[i].substring(2, 4)
     }
 
     console.log('Dates as strings: ' + dateArray)
