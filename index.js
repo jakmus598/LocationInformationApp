@@ -266,22 +266,6 @@ app.get('/weather', async (req, res) => {
         }
       }
       sortedEventInformation[position] = eventInformation[i]
-      /**console.log('Position: ' + position)
-      tempElementArray = eventInformation.splice(position, 1, eventInformation[i])
-      console.log('tempElementArray date: ' + tempElementArray[0]['date'])
-      console.log('-------')
-      for(var i in eventInformation)
-      {
-        console.log(eventInformation[i]['date'])
-      }
-      */
-    }
-
-    console.log('-----')
-    for(var i in sortedEventInformation)
-    {
-      console.log(sortedEventInformation[i]['date'])
-    }
 
     return sortedEventInformation
   }
