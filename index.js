@@ -193,6 +193,7 @@ app.get('/weather', async (req, res) => {
       //Parse date such that it can be compared numerically
       dateSplit = date.split('/')
       numDate = dateSplit[0] + dateSplit[1]
+      console.log('numDate: ' + numDate)
       numDate = Number(numDate)
 
       //Push each numDate to a separate array
@@ -206,7 +207,7 @@ app.get('/weather', async (req, res) => {
     for(var i in dateArray)
     {
       dateArray[i] = dateArray[i].toString()
-      dateArray[i] = dateArray[i].substring(0, 1) + '/' + dateArray[i].substring(2, 3)
+      dateArray[i] = dateArray[i].substring(0, 1) + '/' + dateArray[i].substring(2, 4)
     }
 
     console.log('Dates as strings: ' + dateArray)
