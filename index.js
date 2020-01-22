@@ -193,7 +193,6 @@ app.get('/weather', async (req, res) => {
       //Parse date such that it can be compared numerically
       dateSplit = date.split('/')
       numDate = dateSplit[0] + dateSplit[1]
-      console.log('numDate: ' + numDate)
       numDate = Number(numDate)
 
       //Push each numDate to a separate array
@@ -201,7 +200,6 @@ app.get('/weather', async (req, res) => {
     }
     //Sort the date array
     dateArray = sort.quickSort(dateArray)
-    console.log('Dates as numbers: ' + dateArray)
 
     //Convert the values in dateArray back to Strings so that they can be used in sorting
     for(var i in dateArray)
@@ -216,7 +214,6 @@ app.get('/weather', async (req, res) => {
       dateArray[i] = dateArray[i].substring(0, 2) + '/' + dateArray[i].substring(2, 4)
     }
 
-    console.log('Dates as strings: ' + dateArray)
 
     
     //Organize eventInformation according to dateArray
@@ -227,9 +224,9 @@ app.get('/weather', async (req, res) => {
     {
       //Find the value in dateArray then place it into its proper position
       var position = dateArray.indexOf(tempElementArray[0]['date'])
-      tempElementArray = eventInformation.splice(position, 1, eventInformation[i])
+      tempElementArray = eventInformation.splice(position, 1, tempElementArray[0])
     }
-
+    
     return eventInformation
   }
 
