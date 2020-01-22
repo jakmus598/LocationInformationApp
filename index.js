@@ -266,6 +266,7 @@ app.get('/weather', async (req, res) => {
         }
       }
       sortedEventInformation[position] = eventInformation[i]
+    }
 
     return sortedEventInformation
   }
@@ -740,3 +741,4 @@ app.get('/cooper', function(request, response) {
 //app.listen(PORT)
 app.listen(3000)
 */
+  
