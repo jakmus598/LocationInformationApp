@@ -198,8 +198,20 @@ app.get('/weather', async (req, res) => {
       //Push each numDate to a separate array
       dateArray.push(numDate)
     }
+
+    console.log('Immediately before Quicksort:')
+    for(var i in dateArray)
+    {
+      console.log(dateArray[i])
+    }
     //Sort the date array
     dateArray = sort.quickSort(dateArray)
+
+    console.log('Immediately after Quicksort:')
+    for(var i in dateArray)
+    {
+      console.log(dateArray[i])
+    }
 
     //Convert the values in dateArray back to Strings so that they can be used in sorting
     for(var i in dateArray)
