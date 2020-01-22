@@ -231,8 +231,9 @@ app.get('/weather', async (req, res) => {
     for(var i in eventInformation)
     {
       //Find the value in dateArray then place it into its proper position
-      console.log('eventInformation[date]: ' + eventInformation[i]['date'])
       var position = dateArray.indexOf(eventInformation[i]['date'])
+      console.log('eventInformation[date]: ' + eventInformation[i]['date'])
+      console.log('Position: ' + position)
       sortedEventInformation[position] = eventInformation[i]
       /**console.log('Position: ' + position)
       tempElementArray = eventInformation.splice(position, 1, eventInformation[i])
