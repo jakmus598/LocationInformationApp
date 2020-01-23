@@ -23,10 +23,10 @@ class InformationBox extends TextBox
         this.recordChange = this.recordChange.bind(this)
         //Call the getInfo method to set state['info'] to its initial state
 
-        if(this.state['mode'] === 'preview')
-        {
+        //if(this.state['mode'] === 'preview')
+        //{
             this.getInfo(this.state['filterValue'])
-        }
+        //}
 
     }
 

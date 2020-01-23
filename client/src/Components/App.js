@@ -1,6 +1,6 @@
 import '../CSS/App.css'
 import React, {Component} from 'react'
-import { BrowserRouter as Router, Route} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import TextBox from './TextBox'
 import TextButton from './TextButton'
 import InformationBox from './InformationBox'
@@ -24,6 +24,14 @@ class App extends Component
     {['all', 'music', 'sports', 'arts', 'family', 'film']} filterNames={['All', 'Music', 
     'Sports', 'Arts', 'Family', 'Film']} title='Events' boxType="events"
     state={{'mode': mode, 'filterValue': 'all'}} />)
+    
+    barsBox = (mode) => (<InformationBox getInfo={getBarInformation} otherInfo={['address', 'cityState']} filterChoices=
+    {['all', 'pubs', 'sportsbars', 'winebars']} filterNames={['All', 'Pubs', 
+    'Sports bars', 'Wine bars']} title='Bars' boxType="bars" state={{'mode': mode, 'filterValue': 'all'}} />)
+
+    clubsBox = (mode) => (<InformationBox getInfo={getClubInformation} otherInfo={['address', 'cityState']} filterChoices=
+    {['all', 'socialclubs', 'comedyclubs', 'danceclubs']} filterNames={['All', 'Social', 
+    'Comedy', 'Dance']} title='Clubs' boxType='clubs' state={{'mode': mode, 'filterValue': 'all'}} />)
 
     //FullEventsBox = this.eventsBox('full')
     //TestComponent = () => <p>Hello there</p>
@@ -47,19 +55,18 @@ class App extends Component
         return(
             <div>
                 <h2 className="site-title">Nightlife Network</h2>
-                {this.eventsBox('preview')}
-
                 <Router>
-                    <Route path='/events' exact render={() => this.eventsBox('full')} />
+                    <Switch>
+                        <Route path='/' exact render={() => { return (
+                        <div>
+                            {this.eventsBox('preview')}
+                            {this.barsBox('preview')}
+                            {this.clubsBox('preview')}
+                        </div>
+                        )}} />
+                        <Route path='/events' exact render={() => this.eventsBox('full')} />
+                     </Switch>
                 </Router>
-
-                <InformationBox getInfo={getBarInformation} otherInfo={['address', 'cityState']} filterChoices=
-                {['all', 'pubs', 'sportsbars', 'winebars']} filterNames={['All', 'Pubs', 
-                'Sports bars', 'Wine bars']} title='Bars' boxType="bars" state={{'mode': 'preview', 'filterValue': 'all'}} />
-
-                <InformationBox getInfo={getClubInformation} otherInfo={['address', 'cityState']} filterChoices=
-                {['all', 'socialclubs', 'comedyclubs', 'danceclubs']} filterNames={['All', 'Social', 
-                'Comedy', 'Dance']} title='Clubs' boxType='clubs' state={{'mode': 'preview', 'filterValue': 'all'}} />
         </div>
         )
     }
