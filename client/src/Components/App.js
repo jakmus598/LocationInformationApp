@@ -20,10 +20,13 @@ class App extends Component
     //to use below
 
     //Set variables for each of the Information boxes to allow for easier routing
-    eventsBox = (mode) => {return (<InformationBox getInfo={getEventInformation} otherInfo={['date', 'time']} filterChoices=
+    eventsBox = (mode) => (<InformationBox getInfo={getEventInformation} otherInfo={['date', 'time']} filterChoices=
     {['all', 'music', 'sports', 'arts', 'family', 'film']} filterNames={['All', 'Music', 
     'Sports', 'Arts', 'Family', 'Film']} title='Events' boxType="events"
-    state={{'mode': mode, 'filterValue': 'all'}} />)}
+    state={{'mode': mode, 'filterValue': 'all'}} />)
+
+    //FullEventsBox = this.eventsBox('full')
+    //TestComponent = () => <p>Hello there</p>
 
     /**
      * <InformationBox getInfo={getEventInformation} otherInfo={['date', 'time']} filterChoices=
@@ -31,19 +34,24 @@ class App extends Component
                 'Sports', 'Arts', 'Family', 'Film']} title='Events' boxType="events"
                  state={{'mode': 'preview', 'filterValue': 'all'}} />
      */
+
+     /**
+      * <Router>
+                 <Route path="/events" exact render={() => {
+                     return (<div>{this.eventsBox('preview')}</div>)
+                 }} />
+                 </Router>
+      */
     render()
     {
         return(
             <div>
                 <h2 className="site-title">Nightlife Network</h2>
                 {this.eventsBox('preview')}
-                 
-                 <Router>
-                 <Route path="/events" exact render={() => {
-                     return (<div>{this.eventsBox('preview')}</div>)
-                 }} />
-                 </Router>
 
+                <Router>
+                    <Route path='/events' exact component={this.eventsBox('full')} />
+                </Router>
 
                 <InformationBox getInfo={getBarInformation} otherInfo={['address', 'cityState']} filterChoices=
                 {['all', 'pubs', 'sportsbars', 'winebars']} filterNames={['All', 'Pubs', 

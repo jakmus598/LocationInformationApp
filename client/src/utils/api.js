@@ -11,7 +11,8 @@ var fetch = require('node-fetch')
 */
 const API_URL = 'http://location-wizard.herokuapp.com'
 
-
+//TODO: Use Facebook? API to get less known events so that there is more variety
+//Maybe can be done when user logs in through facebook
 export async function getEventInformation(type)
 {
     var targetURL = ''

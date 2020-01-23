@@ -20,15 +20,7 @@ class TextBox extends Component
     {
         return(
             <div className="box">
-                <div>
-                { () => {
-                    if(this.state['mode'] === 'preview')
-                    {
-                        return this.props.filterList
-                    }
-                 }
-              }
-                </div>
+                {this.props.filterList}
                 <Container>{this.props.title}
                 {this.props.children}
                 </Container>
