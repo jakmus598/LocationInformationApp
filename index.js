@@ -119,7 +119,7 @@ passport.use(new TwitterStrategy({
     accessToken: TWITTER_ACCESS_TOKEN,
     tokenSecret: TWITTER_TOKEN_SECRET,
     //callbackURL - Where user is redirected to after request is confirmed
-    callbackURL: '/'
+    callbackURL: 'http://localhost:3000/'
 }, //(accessToken) => console.log(accessToken)))
 function(accessToken, tokenSecret, profile, done) {
     console.log(profile)
