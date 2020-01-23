@@ -148,7 +148,8 @@ function parseYelp(jsonRes)
 }
 
 
-app.get('/login/twitter', passport.authenticate('twitter'))
+app.get('/login/twitter', passport.authenticate('twitter'), (req, res) => {
+    console.log(res.json())})
 
 app.get('/weather', async (req, res) => {
 
