@@ -50,7 +50,7 @@ class App extends Component
                 {this.eventsBox('preview')}
 
                 <Router>
-                    <Route path='/events' exact component={this.eventsBox('full')} />
+                    <Route path='/events' exact render={() => this.eventsBox('full')} />
                 </Router>
 
                 <InformationBox getInfo={getBarInformation} otherInfo={['address', 'cityState']} filterChoices=

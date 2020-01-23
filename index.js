@@ -120,9 +120,9 @@ passport.use(new TwitterStrategy({
     tokenSecret: TWITTER_TOKEN_SECRET,
     //callbackURL - Where user is redirected to after request is confirmed
     callbackURL: 'http://localhost:3000/'
+    //console.log('Callback URL ')
 }, //(accessToken) => console.log(accessToken)))
 function(accessToken, tokenSecret, profile, done) {
-    console.log('Callback function executed')
     //User.findOrCreate(..., function(err, user) {
       //if (err) { return done(err); }
       //done(null, user);
@@ -148,8 +148,8 @@ function parseYelp(jsonRes)
 }
 
 
-app.get('/login/twitter', passport.authenticate('twitter'), (req, res) => {
-    console.log(req.json())})
+app.get('/login/twitter', passport.authenticate('twitter'), (req, res, next) => {
+    return res.send()})
 
 app.get('/weather', async (req, res) => {
 
