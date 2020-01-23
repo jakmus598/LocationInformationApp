@@ -122,7 +122,7 @@ passport.use(new TwitterStrategy({
     callbackURL: 'http://localhost:3000/'
 }, //(accessToken) => console.log(accessToken)))
 function(accessToken, tokenSecret, profile, done) {
-    console.log(profile)
+    console.log('PROFILEPROFILEPROFILE: ' + profile)
     //User.findOrCreate(..., function(err, user) {
       //if (err) { return done(err); }
       //done(null, user);
@@ -199,19 +199,9 @@ app.get('/weather', async (req, res) => {
       dateArray.push(numDate)
     }
 
-    console.log('Immediately before Quicksort:')
-    for(var i in dateArray)
-    {
-      console.log(dateArray[i])
-    }
+    
     //Sort the date array
     dateArray = sort.quickSort(dateArray)
-
-    console.log('Immediately after Quicksort:')
-    for(var i in dateArray)
-    {
-      console.log(dateArray[i])
-    }
 
     //Convert the values in dateArray back to Strings so that they can be used in sorting
     for(var i in dateArray)
