@@ -149,17 +149,10 @@ function parseYelp(jsonRes)
 }
 
 
-app.get('/login/twitter', passport.authenticate('twitter'), function(req, res) {
+app.get('/login/twitter', passport.authenticate('twitter'), async (req, res) => {
   console.log('Route callback function executed')
   console.log(req.profile)})
 
-app.get('/weather', async (req, res) => {
-
-/**
- * Taken from https://www.npmjs.com/package/oauth-1.0a
- */
-
-})
 
 /**
    * Parses and properly organizes events so that necessary event information is returned
