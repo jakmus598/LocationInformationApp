@@ -25,6 +25,7 @@ This application uses the following packages
 * Node.js
 * React.js
 * Express.js
+* Passport.js
 
 To start the server, change your directory to the client folder, then run the following command:
 ```bash
