@@ -123,6 +123,7 @@ passport.use(new TwitterStrategy({
     //console.log('Callback URL ')
 }, //(accessToken) => console.log(accessToken)))
 function(accessToken, tokenSecret, profile, done) {
+  console.log('Callback function executed')
     //User.findOrCreate(..., function(err, user) {
       //if (err) { return done(err); }
       //done(null, user);
@@ -148,8 +149,9 @@ function parseYelp(jsonRes)
 }
 
 
-app.get('/login/twitter', passport.authenticate('twitter'), (req, res, next) => {
-    return res.send()})
+app.get('/login/twitter', passport.authenticate('twitter'), function(req, res) {
+  console.log('Route callback function executed')
+  console.log(req.profile)})
 
 app.get('/weather', async (req, res) => {
 

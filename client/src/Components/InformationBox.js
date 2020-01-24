@@ -22,11 +22,7 @@ class InformationBox extends TextBox
         super(props)
         this.recordChange = this.recordChange.bind(this)
         //Call the getInfo method to set state['info'] to its initial state
-
-        //if(this.state['mode'] === 'preview')
-        //{
-            this.getInfo(this.state['filterValue'])
-        //}
+        this.getInfo(this.state['filterValue'])
 
     }
 

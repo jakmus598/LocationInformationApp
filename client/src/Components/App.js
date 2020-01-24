@@ -65,6 +65,8 @@ class App extends Component
                         </div>
                         )}} />
                         <Route path='/events' exact render={() => this.eventsBox('full')} />
+                        <Route path='/bars' exact render={() => this.barsBox('full')} />
+                        <Route path='/clubs' exact render={() => this.clubsBox('full')} />
                      </Switch>
                 </Router>
         </div>
