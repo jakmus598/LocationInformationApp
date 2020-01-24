@@ -149,7 +149,7 @@ function parseYelp(jsonRes)
 }
 
 
-app.post('/login/twitter', async (req, res) => {
+app.get('/login/twitter', async (req, res) => {
   passport.authenticate('twitter', function(accessToken, tokenSecret, profile, done) {
     console.log('PROFILE: ' + profile)
   })})
