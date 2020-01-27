@@ -127,8 +127,7 @@ passport.use(new TwitterStrategy({
     //console.log('Callback URL ')
 }, //(accessToken) => console.log(accessToken)))
 function(accessToken, tokenSecret, profile, done) {
-  new User  = ({id: profile.id}).save()
-
+  new User({id: profile.id}).save()
   done(null, {accessToken, profile})
   //console.log('Callback function executed')
     //User.findOrCreate(..., function(err, user) {
