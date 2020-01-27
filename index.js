@@ -129,8 +129,8 @@ passport.use(new TwitterStrategy({
     //console.log('Callback URL ')
 }, //(accessToken) => console.log(accessToken)))
 async function(accessToken, tokenSecret, profile, done) {
+console.log(mongoose.connection.readyState)
  var newUser = await new User({id: profile.id}).save()
- console.log(newUser)
   done(null, {accessToken, newUser})
   //console.log('Callback function executed')
     //User.findOrCreate(..., function(err, user) {
