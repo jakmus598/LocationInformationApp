@@ -119,11 +119,12 @@ passport.use(new TwitterStrategy({
     accessToken: TWITTER_ACCESS_TOKEN,
     tokenSecret: TWITTER_TOKEN_SECRET,
     //callbackURL - Where user is redirected to after request is confirmed
-    callbackURL: 'http://localhost:3000/'
+    callbackURL: '/auth/success'
     //console.log('Callback URL ')
 }, //(accessToken) => console.log(accessToken)))
 function(accessToken, tokenSecret, profile, done) {
-  console.log('Callback function executed')
+  done(null, {accessToken, profile})
+  //console.log('Callback function executed')
     //User.findOrCreate(..., function(err, user) {
       //if (err) { return done(err); }
       //done(null, user);
@@ -149,9 +150,14 @@ function parseYelp(jsonRes)
 }
 
 
-app.get('/login/twitter', passport.authenticate('twitter', function(accessToken, tokenSecret, profile, done) {
+/**app.get('/login/twitter', passport.authenticate('twitter', function(accessToken, tokenSecret, profile, done) {
     console.log('PROFILE: ' + profile)
   }))
+  */
+
+ app.get('/login/twitter', passport.authenticate('twitter'))
+
+ app.get('/auth/twitter', passport.authenticate('twitter'), (req, res) => {res.send(req.user)})
   
 
 
