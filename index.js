@@ -112,6 +112,8 @@ const tokenConfig = {
   }
   **/
 
+passport.serializeUser((user, done) => done(null, {profile: user.profile, accessToken: user.accessToken}))
+
   //USER AUTHENTICATION WITH TWITTER
 passport.use(new TwitterStrategy({
     consumerKey: TWITTER_CONSUMER_KEY,
@@ -131,6 +133,7 @@ function(accessToken, tokenSecret, profile, done) {
     //});
   }
 ))
+
 
 /**
  * A function to parse Yelp data
@@ -157,7 +160,7 @@ function parseYelp(jsonRes)
 
  app.get('/login/twitter', passport.authenticate('twitter'))
 
- app.get('/auth/twitter', passport.authenticate('twitter'), (req, res) => {res.send(req.user)})
+ app.get('/auth/twitter', passport.authenticate('twitter'), (req, res) => {res.send(req.user.profile)})
   
 
 
