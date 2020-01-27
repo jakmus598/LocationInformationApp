@@ -20,6 +20,7 @@ require('./Models/User')
 var User = mongoose.model('users')
 var mongoDB = 'mongodb://127.0.0.1/LocationWizardUsers'
 mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true})
+var newUser = new User({id: '12345678'}).save()
 
 //mongoose.connect(mongoDB, {useNewUrlParser: true})
 //console.log(mongoose.connection)
@@ -114,7 +115,7 @@ const tokenConfig = {
   }
   **/
 
-passport.serializeUser((user, done) => done(null, user.id))
+passport.serializeUser((user, done) => done(null, {profile: user.profile}))
 
   //USER AUTHENTICATION WITH TWITTER
 passport.use(new TwitterStrategy({
@@ -128,7 +129,7 @@ passport.use(new TwitterStrategy({
 }, //(accessToken) => console.log(accessToken)))
 function(accessToken, tokenSecret, profile, done) {
  var newUser = new User({id: profile.id}).save()
-  done(null, {accessToken, newUser})
+  done(null, {accessToken, profile})
   //console.log('Callback function executed')
     //User.findOrCreate(..., function(err, user) {
       //if (err) { return done(err); }
