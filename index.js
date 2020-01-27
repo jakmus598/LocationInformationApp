@@ -114,7 +114,7 @@ const tokenConfig = {
   }
   **/
 
-passport.serializeUser((user, done) => done(null, {profile: user.profile, accessToken: user.accessToken}))
+passport.serializeUser((user, done) => done(null, user.id))
 
   //USER AUTHENTICATION WITH TWITTER
 passport.use(new TwitterStrategy({
@@ -127,7 +127,7 @@ passport.use(new TwitterStrategy({
     //console.log('Callback URL ')
 }, //(accessToken) => console.log(accessToken)))
 function(accessToken, tokenSecret, profile, done) {
- var newUser = new User({id: profile.id}).save()
+ var newUser = await new User({id: profile.id}).save()
   done(null, {accessToken, newUser})
   //console.log('Callback function executed')
     //User.findOrCreate(..., function(err, user) {
