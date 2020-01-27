@@ -3,8 +3,9 @@ var Schema = mongoose.Schema
 
 var userSchema = new Schema({
     id: String,
-    checkIns: Array,
-    ratings: Array,
+    //checkIns: Array,
+    //ratings: Array,
+    //posts: Array
 
 })
 

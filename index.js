@@ -11,11 +11,13 @@ var cors = require('cors')
 var crypto = require('crypto')
 var sort = require('sort-algorithms')
 
+
 /**
  * Set up MongoDB connection
  */
 var mongoose = require('mongoose')
 require('./Models/User')
+var User = mongoose.model('users')
 var mongoDB = 'mongodb://127.0.0.1/LocationWizardUsers'
 mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true})
 
@@ -125,6 +127,8 @@ passport.use(new TwitterStrategy({
     //console.log('Callback URL ')
 }, //(accessToken) => console.log(accessToken)))
 function(accessToken, tokenSecret, profile, done) {
+  new User  = ({id: profile.id}).save()
+
   done(null, {accessToken, profile})
   //console.log('Callback function executed')
     //User.findOrCreate(..., function(err, user) {
@@ -162,7 +166,6 @@ function parseYelp(jsonRes)
 
  app.get('/auth/twitter', passport.authenticate('twitter'), (req, res) => {res.send(req.user.profile)})
   
-
 
 
 /**
