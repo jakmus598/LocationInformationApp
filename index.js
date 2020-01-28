@@ -117,7 +117,7 @@ const tokenConfig = {
   }
   **/
 
-passport.serializeUser((user, done) => done(null, {profile: user.profile}))
+passport.serializeUser((user, done) => done(null, {profileID: user.profile.id}))
 
   //USER AUTHENTICATION WITH TWITTER
 passport.use(new TwitterStrategy({
@@ -132,7 +132,7 @@ passport.use(new TwitterStrategy({
 async function(accessToken, tokenSecret, profile, done) {
 console.log(mongoose.connection.readyState)
  var newUser = await new User({id: profile.id}).save()
-  done(null, {accessToken, newUser})
+  done(null, {accessToken, profile})
   //console.log('Callback function executed')
     //User.findOrCreate(..., function(err, user) {
       //if (err) { return done(err); }
