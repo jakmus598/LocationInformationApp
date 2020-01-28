@@ -22,7 +22,7 @@ var mongoDB = 'mongodb://127.0.0.1/LocationWizardUsers'
 mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true}).catch(console.log)
 console.log(process.env.MONGO_URI)
 //Test
-var newUser = new User({id: '12345678'}).save()
+//var newUser = new User({id: '12345678'}).save()
 
 //mongoose.connect(mongoDB, {useNewUrlParser: true})
 //console.log(mongoose.connection)
