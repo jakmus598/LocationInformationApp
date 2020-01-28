@@ -17,7 +17,7 @@ var sort = require('sort-algorithms')
  */
 var mongoose = require('mongoose')
 require('./Models/User')
-var User = mongoose.model('uaers')
+var User = mongoose.model('users')
 var mongoDB = 'mongodb://127.0.0.1/LocationWizardUsers'
 mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true}).catch(console.log)
 console.log(process.env.MONGO_URI)
