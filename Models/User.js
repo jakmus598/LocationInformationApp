@@ -12,5 +12,5 @@ var userSchema = new Schema({
 })
 
 //Define a model for 'users' collection
-mongoose.model('users', userSchema)
+module.exports = mongoose.model('User', userSchema)
 
