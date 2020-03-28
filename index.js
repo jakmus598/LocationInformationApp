@@ -16,8 +16,8 @@ var sort = require('sort-algorithms')
  * Set up MongoDB connection
  */
 var mongoose = require('mongoose')
-require('./Models/User')
-var User = mongoose.model('users')
+var userRepresentation = require('./Models/User')
+var User = mongoose.model('User', userRepresentation.userSchema)
 var mongoDB = 'mongodb://127.0.0.1/LocationWizardUsers'
 mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true}).catch(console.log)
 console.log(process.env.MONGO_URI)
@@ -117,7 +117,11 @@ const tokenConfig = {
   }
   **/
 
+
+
 passport.serializeUser((user, done) => done(null, {profileID: user.profile.id}))
+passport.deserializeUser((user, done) => {User.findById(user.profileID, (err, userFound) => {done(null, userFound)})})
+//passport.deserializeUser
 
   //USER AUTHENTICATION WITH TWITTER
 passport.use(new TwitterStrategy({
@@ -131,7 +135,7 @@ passport.use(new TwitterStrategy({
 }, //(accessToken) => console.log(accessToken)))
 async function(accessToken, tokenSecret, profile, done) {
 console.log(mongoose.connection.readyState)
- var newUser = await new User({id: profile.id}).save()
+ var newUser = await new User({id: profile.id, name: profile.displayName}).save()
   done(null, {accessToken, profile})
   //console.log('Callback function executed')
     //User.findOrCreate(..., function(err, user) {

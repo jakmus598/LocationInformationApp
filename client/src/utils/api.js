@@ -74,3 +74,12 @@ export async function getClubInformation(type)
     //res.json()).then(data => {return Promise.resolve(data)}))
 }
 
+export async function twitterLogin()
+{
+    var targetURL = '/auth/twitter'
+
+    var fetchRes = await fetch(targetURL)
+    
+
+}
+
