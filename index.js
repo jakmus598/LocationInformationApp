@@ -353,7 +353,7 @@ app.get('/events', async (req, res, error) => {
     //Get the response of making the API call to TicketMaster
     //TODO: Obtain city name from entered zip code (allows for better results in this API)
     var fetchResTicketMaster = await fetch('https://app.ticketmaster.com/discovery/v2/events.json?apikey=' + TICKETMASTER_API_KEY + 
-    '&city=Chicago&stateCode=IL&endDateTime=2020-04-01T12:00:00Z')
+    '&city=Chicago&stateCode=IL&endDateTime=2020-04-25T12:00:00Z')
     //TODO: Adjust date so that only events within x number of days appear 
     //TODO: Get it working so that it sorts by date &sort=date,asc')
     //&city=Chicago&stateCode=IL&sort=date,asc
@@ -367,7 +367,7 @@ app.get('/events', async (req, res, error) => {
     //Get the response of making the API call to TicketMaster
     //TODO: Obtain city name from entered zip code (allows for better results in this API)
     var fetchResTicketMaster = await fetch('https://app.ticketmaster.com/discovery/v2/events.json?apikey=' + TICKETMASTER_API_KEY + 
-    '&city=Chicago&stateCode=IL&endDateTime=2020-05-25T12:00:00Z&classificationName=music')
+    '&city=Chicago&stateCode=IL&endDateTime=2020-04-25T12:00:00Z&classificationName=music')
     //TODO: Get it working so that it sorts by date &sort=date,asc')
     //&city=Chicago&stateCode=IL&sort=date,asc
     //Conert that response to a JSON object (returns a promise)
